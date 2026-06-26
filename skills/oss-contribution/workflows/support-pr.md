@@ -1,0 +1,64 @@
+# Workflow: Support (cuidar dos PRs proprios)
+
+Objetivo: triar e avancar os PRs/issues ja abertos com disciplina senior. Cada acao
+publica passa pelo confirm-gate do SKILL.md.
+
+Crie um TodoWrite com estes passos. Trabalhe um PR por vez.
+
+## 1. Enumerar
+
+```
+gh search prs --author Ewertonslv --json number,title,repository,state,url
+```
+Para cada PR aberto/relevante, pegue o estado completo (parse com `ConvertFrom-Json`):
+```
+gh pr view <num> --repo OWNER/REPO --json state,mergedAt,reviewDecision,mergeStateStatus,statusCheckRollup,comments,reviews,updatedAt
+```
+Liste tambem issues onde voce comentou/abriu PR (ex.: fastmcp aguardando assignment).
+
+## 2. Classificar o feedback de cada PR
+
+Para cada um, identifique a classe (pode ter mais de uma):
+
+- **CI falhando** -> passo 3.
+- **Thread de review aberto** (humano ou bot: Greptile/CodeRabbit/Codex/veria-ai) -> passo 4.
+- **Nitpick de bot** (ex.: "cobertura incompleta") -> passo 4, tratar como feedback valido.
+- **Achado de seguranca** -> passo 4 + security-self-review.md.
+- **Aprovado, aguardando merge** -> nada a fazer; reportar e seguir.
+- **Fechado por bot** (ex.: `missing-issue-link`) -> repo-rules.md (pedir assignment).
+
+## 3. Diagnosticar CI: staleness vs falha real
+
+ANTES de editar codigo, descubra se a falha e do seu codigo ou de branch desatualizada:
+
+1. Veja os jobs que falharam: `gh run view --repo OWNER/REPO --job <id> --log-failed`.
+2. Sinais de **staleness** (NAO e seu codigo): `lint`/`budget-ratchet`/scripts de gate falhando com "unrecognized arguments", budgets "raised", workflow chamando flag que sua versao do script nao tem. Quantos commits atras: `git rev-list --left-right --count HEAD...upstream/<base>`.
+   - Fix: `git fetch upstream <base>`; `git merge upstream/<base>` (ou rebase) na sua branch; re-rodar testes locais; push (confirm-gate).
+3. Se for **falha real do seu codigo** -> corrija (passo 4) com before-after-proof.
+
+Sempre confirme: a falha tambem ocorre na `upstream/main` limpa? (`git checkout upstream/main` e rode -> se falha igual, e pre-existente, nao sua.)
+
+## 4. Corrigir / responder
+
+- Mudanca de codigo: aplique o fix minimo. Se mexer em **tipo/union/assinatura compartilhada** -> blast-radius.md. Se "abrir" um forward/param -> security-self-review.md.
+- Adicione/ajuste **teste** com prova before-after-proof.md (RED->GREEN). Se o feedback e "cobertura incompleta", cubra exatamente o que voce mudou (todos os membros que adicionou).
+- Rode suite + typecheck completos do repo (targets.md), nao so `ruff` + 1 teste.
+- Se o fix revelar **fallout semantico** (exaustividade quebrada, churn grande de snapshot, reclassificacao via builder) -> draft-and-ask.md: NAO force verde; converta pra DRAFT e pergunte a direcao ao maintainer (confirm-gate).
+
+## 5. Responder e resolver threads
+
+Para cada thread endereçado (review-response.md):
+- Responder citando o **SHA** do commit que corrige + o que foi feito.
+- **Resolver** o thread (GraphQL `resolveReviewThread`).
+- Re-rodar e colar provas que o maintainer pediu (before/after).
+- Cada reply/resolve/push = confirm-gate.
+
+## 6. Verificar e reportar
+
+- Confirme CI verde / threads resolvidos.
+- Reporte ao usuario o estado de cada PR e o que ainda depende de maintainer.
+- NAO afirme "mergeado/aprovado" sem checar o estado real via `gh pr view`.
+
+## Lembrete de honestidade
+
+Reporte com fidelidade: se um check falhou, diga com a saida; se algo depende de terceiro, diga; nao infle "esta pronto" sem evidencia.
