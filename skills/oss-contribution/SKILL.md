@@ -35,13 +35,16 @@ Sem argumento: pergunte. Crie um TodoWrite com os passos do workflow.
 Leia a reference quando o gate disparar:
 
 - **anti-duplicate.md** — 3 buscas + re-check imediato antes de abrir.
+- **delivery-quality.md** — entender-primeiro, TDD, cobrir tudo que mudou, gates padrao, convencoes do repo, auto-review.
 - **before-after-proof.md** — sem teste falha->passa, nao ha PR (vira comentario).
-- **blast-radius.md** — tipo/union/assinatura compartilhada: cace consumidores exaustivos + suite/typecheck completos.
+- **blast-radius.md** — tipo/union compartilhada: cace consumidores exaustivos + suite/typecheck.
 - **security-self-review.md** — abriu forward/param? O que mais flui por ele?
 - **draft-and-ask.md** — fallout semantico: DRAFT + pergunta; nunca force CI verde.
 - **authoring-hygiene.md** — fork/branch off upstream, Conv Commits, identidade, SEM trailer Claude.
 - **repo-rules.md** — regras por repo (ex.: fastmcp exige assignment ANTES).
 - **env-tooling.md** — gotchas Windows/PowerShell/gh/jq/UTF-8/uv/ruff/pyright.
+
+**REQUIRED SUB-SKILLS** (use as superpowers, nao reinvente): systematic-debugging, test-driven-development, requesting-code-review, verification-before-completion.
 
 ## Quick Reference
 
@@ -54,7 +57,6 @@ Leia a reference quando o gate disparar:
 | Prova RED->GREEN | escreve teste -> `git stash` -> falha -> `git stash pop` -> passa |
 | Pre-existente vs meu | checkout `upstream/main` limpo e comparar |
 | Resolver thread | GraphQL `resolveReviewThread` (ver review-response.md) |
-| Parse gh JSON (Win) | `ConvertFrom-Json` — NUNCA `jq \(...)` inline |
 
 ## Red Flags — PARE e corrija o curso
 

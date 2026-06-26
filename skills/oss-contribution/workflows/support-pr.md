@@ -38,11 +38,13 @@ ANTES de editar codigo, descubra se a falha e do seu codigo ou de branch desatua
 
 Sempre confirme: a falha tambem ocorre na `upstream/main` limpa? (`git checkout upstream/main` e rode -> se falha igual, e pre-existente, nao sua.)
 
-## 4. Corrigir / responder
+## 4. Corrigir / responder — delivery-quality.md
 
-- Mudanca de codigo: aplique o fix minimo. Se mexer em **tipo/union/assinatura compartilhada** -> blast-radius.md. Se "abrir" um forward/param -> security-self-review.md.
-- Adicione/ajuste **teste** com prova before-after-proof.md (RED->GREEN). Se o feedback e "cobertura incompleta", cubra exatamente o que voce mudou (todos os membros que adicionou).
-- Rode suite + typecheck completos do repo (targets.md), nao so `ruff` + 1 teste.
+- **Entender primeiro** (REQUIRED SUB-SKILL se nao-trivial: superpowers:systematic-debugging): ler o thread/CI a fundo, achar a causa-raiz, espelhar o idioma do codebase.
+- Aplique o fix **minimo e idiomatico**. Se mexer em **tipo/union/assinatura compartilhada** -> blast-radius.md. Se "abrir" um forward/param -> security-self-review.md.
+- **Teste** com prova before-after-proof.md (RED->GREEN; ordem TDD — superpowers:test-driven-development). Se o feedback e "cobertura incompleta", cubra **tudo** que voce mudou (todos os membros/ramos), nao so um.
+- **Gates padrao SEMPRE** (delivery-quality.md secao 4): suite afetada completa + `ruff check`/`format` + typecheck (em pydantic-ai `make typecheck-pyright`). Separe falha pre-existente (checkout `upstream/main`) de culpa sua.
+- **Auto-review** do diff antes do push (superpowers:requesting-code-review / `/simplify`): minimo, sem debug morto, so arquivos pretendidos.
 - Se o fix revelar **fallout semantico** (exaustividade quebrada, churn grande de snapshot, reclassificacao via builder) -> draft-and-ask.md: NAO force verde; converta pra DRAFT e pergunte a direcao ao maintainer (confirm-gate).
 
 ## 5. Responder e resolver threads
