@@ -15,6 +15,11 @@ Identidade: GitHub `Ewertonslv`, autor de commit `Ewerton Silva <ewertoncom297@g
 | pydantic/pydantic-ai | sim | nao | **SIM** (`pydanty` auto-file + auto-PR) | uv | `uv run pytest <path>` | `make typecheck-pyright` (lint roda pyright) |
 | modelcontextprotocol/python-sdk | sim | nao | nao | uv | `uv run pytest <path>` | — |
 | modelcontextprotocol/servers | sim | nao | nao | npm/uv | conforme server | — |
+| NVIDIA/garak | sim | nao* (*bug PR: issue assigned/`bug-verified` OU teste confirmando) | nao | pip+flit (`pip install -e ".[tests]"`) | `python -m pytest tests/` | `black --config pyproject.toml <files>` + `pylint -v garak` |
+| 567-labs/instructor | sim | nao | nao | uv (`uv pip install -e ".[dev,docs,test-docs]"`) | `uv run pytest tests/` (offline: `-k "not llm and not openai"`) | `uv run ruff check` + `uv run ty check` (Astral **ty**, nao mypy/pyright) |
+| simonw/llm | sim | nao | nao (dependabot) | uv (`uv run ...`) ou `pip install . --group dev` | `python -m pytest -vv` | black + mypy + ruff + **cog** (`just cog`) |
+| dottxt-ai/outlines | sim | nao (feature exige issue previa) | **SIM** (`octo-patch` auto-PR de fixes) | pip/uv (`pip install -e ".[test]"` + `pre-commit install`) | `pytest` (CI `-m "not api_call"`; baixa modelos) | pre-commit (ruff + mypy); **gate de 100% coverage** |
+| traceloop/openllmetry | sim | nao (soft: comentar na issue) | nao (dependabot) | uv + Nx monorepo (`npm ci` + `npx nx ...`) | `npx nx run <pkg>:test` (= `uv run pytest tests/`) | `npx nx affected -t lint` (ruff) + `-t type-check` |
 
 ## Legenda
 
@@ -22,6 +27,7 @@ Identidade: GitHub `Ewertonslv`, autor de commit `Ewerton Silva <ewertoncom297@g
 - **exige_assignment**: se a issue precisa estar atribuida a voce ANTES do PR (senao bot fecha). Ver repo-rules.md.
 - **bot_auto_pr**: se ha bot que auto-abre PRs/issues — re-check anti-duplicate e critico aqui.
 - **test/typecheck**: comando local pra validar. Em pydantic-ai, rodar typecheck completo ANTES do push (lint do CI = pyright; `ruff` local nao pega exaustividade).
+- **CLA/DCO** (nao cabe na tabela; ver repo-rules.md): **garak** exige DCO (`git commit -s` em TODO commit) + assinar CA/DCO no 1o PR; **openllmetry** exige assinar CLA (bot CLAassistant) no 1o PR. Os demais alvos: nenhum.
 
 ## Forks ja existentes (clones locais)
 
@@ -31,3 +37,7 @@ Identidade: GitHub `Ewertonslv`, autor de commit `Ewerton Silva <ewertoncom297@g
 - `C:\Users\Ewerton\Documents\Projetos github\python-sdk`
 
 Reusar esses clones; sincronizar com `git fetch upstream main` antes de criar branch.
+
+Alvos novos (garak, instructor, simonw/llm, outlines, openllmetry) **ainda sem clone local** —
+no primeiro discover, fazer fork + `git clone --filter=blob:none` (ver authoring-hygiene.md) e
+adicionar o path aqui.
