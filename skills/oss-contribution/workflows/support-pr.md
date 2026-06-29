@@ -24,6 +24,7 @@ Para cada um, identifique a classe (pode ter mais de uma):
 - **Thread de review aberto** (humano ou bot: Greptile/CodeRabbit/Codex/veria-ai) -> passo 4.
 - **Nitpick de bot** (ex.: "cobertura incompleta") -> passo 4, tratar como feedback valido.
 - **Achado de seguranca** -> passo 4 + security-self-review.md.
+- **Sinal positivo de bot** (Greptile "Confidence X/5 - Safe to merge"/"T-Rex verified", Codecov "all modified lines covered", veria-ai "no security concerns") -> NADA a fazer alem de registrar como verde. NAO responder/agradecer cada bot (vira ruido no PR); so reportar ao usuario e seguir.
 - **Aprovado, aguardando merge** -> nada a fazer; reportar e seguir.
 - **Fechado por bot** (ex.: `missing-issue-link`) -> repo-rules.md (pedir assignment).
 
@@ -55,7 +56,19 @@ Para cada thread endereçado (review-response.md):
 - Re-rodar e colar provas que o maintainer pediu (before/after).
 - Cada reply/resolve/push = confirm-gate.
 
-## 6. Verificar e reportar
+## 6. Nudge de cortesia (PR proprio parado)
+
+Quando um PR seu esta **verde + sem thread aberto + aguardando review HUMANO ha > ~14 dias**:
+opcionalmente UM ping curto e educado (confirm-gate). Regras:
+- Maximo **1 nudge por PR a cada ~2 semanas**; nunca repetir/spammar.
+- Nao @-marcar muita gente; se ja ha promessa de review, NAO pingar.
+- Default e nao fazer — so ofereça ao usuario; ele decide.
+
+Template:
+> "Friendly ping — this one's green and has been waiting on a review for a couple of weeks.
+> Happy to rebase or address anything if it helps. Thanks!"
+
+## 7. Verificar e reportar
 
 - Confirme CI verde / threads resolvidos.
 - Reporte ao usuario o estado de cada PR e o que ainda depende de maintainer.

@@ -13,7 +13,17 @@ Crie um TodoWrite com estes passos.
   gh issue list --repo OWNER/REPO --state open --limit 40 --search "sort:created-desc label:bug" --json number,title,createdAt,labels,comments,assignees
   ```
   Tambem tentar `label:"help wanted"` / `label:"good first issue"`.
-- **Opcional (>=3 repos):** recon paralelo via Explore agents (um por repo) so para montar a LISTA de candidatos. O resultado e candidato, NUNCA luz verde — o re-check do passo 9 e sempre sequencial e fresco.
+- **Opcional (>=3 repos):** recon paralelo via Explore agents (um por repo) so para montar a LISTA de candidatos. O resultado e candidato, NUNCA luz verde — o re-check do passo 11 e sempre sequencial e fresco.
+- **Fonte extra: post-mortem de PR/issue fechado.** Seus PRs recem-fechados/rejeitados e issues de bot
+  fechadas como "invalid" frequentemente escondem um bug adjacente real — OU confirmam que o maintainer
+  estava certo. Protocolo:
+  1. **Verifique LOCALMENTE** a justificativa do maintainer (o shape/claim que ele negou existe mesmo no
+     codigo upstream?).
+  2. Premissa cai -> **encerre o lead honestamente**, sem follow-up publico.
+  3. Inconsistencia real e *diferente* -> vira candidato normal (segue pro passo 2: anti-duplicate + TDD).
+  - Precedente: pydantic-ai #6048 fechado "Invalid" -> investigacao local confirmou o maintainer
+    (adapters roteiam `NativeToolReturnPart` p/ ModelResponse via `MessagesBuilder.add`) e o pivot levou
+    ao litellm #31594/#31601 (bug adjacente real em `cost_breakdown`).
 
 ## 2. Anti-duplicate gate (OBRIGATORIO antes de investir)
 
