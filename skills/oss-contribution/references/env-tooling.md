@@ -61,6 +61,25 @@ Vividos numa sessao real (PR #31601). Evitam re-tropecar:
    `git checkout -- litellm/litellm_core_utils/tokenizers/`. (Complementa authoring-hygiene, que so cita
    o artefato de install editavel, nao o de test run.)
 
+## Repos com dev-deps nativas (Windows) + tools Linux-only (pytype)
+
+Vivido no mcp-context-forge (#5451):
+
+1. **`uv sync --group dev`/`--dev` QUEBRA no Windows** se uma dev-dep compila nativo (aqui `pytype`
+   -> `Unable to find a compatible Visual Studio installation`). A sync aborta e NENHUM pytest instala.
+   - Instalar o stack avulso: `uv pip install pytest pytest-asyncio pytest-env pytest-httpx pytest-timeout pytest-mock ruff black isort bandit pylint`.
+   - Rodar com `uv run --no-sync pytest ...` pra NAO re-disparar a sync quebrada.
+2. **Tool Linux-only (pytype) via Docker no Windows:**
+   - Daemon off? `Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"` e poll `docker info`.
+   - Git Bash MASTIGA path de container (`-w /app` vira `C:/Program Files/Git/app`). Usar:
+     `MSYS_NO_PATHCONV=1 docker run --rm -v "$(pwd -W)":/app -w //app python:<ver> bash -lc '...'`.
+   - CASAR a versao do Python com a config do repo, nao a mais nova: `[tool.pytype] python_version`
+     do mcp-context-forge = 3.11 -> `python:3.11` + `--python-version=3.11`. Dentro: `pip install -e .` + `pip install pytype`.
+3. **NAO usar `tail`/`head` quando precisa da lista COMPLETA de erros de linter/typechecker.** pytype/pylint
+   marcam `~~~~` por linha e o veredito vem no fim; truncar perde o pass/fail e o `file:linha` de cada erro.
+   Redirecionar a saida inteira a um arquivo e `grep` pelos seus ranges. (Vivido: `tail -40` no container
+   escondeu se o pytype passou ou so reclamou de codigo pre-existente.)
+
 ## git grep lento em clone blobless
 
 `git grep <pat> <rev> -- '**/*.py'` num clone `--filter=blob:none` baixa blobs sob demanda e pode

@@ -14,6 +14,8 @@ Crie um TodoWrite com estes passos.
   ```
   Tambem tentar `label:"help wanted"` / `label:"good first issue"`.
 - **Opcional (>=3 repos):** recon paralelo via Explore agents (um por repo) so para montar a LISTA de candidatos. O resultado e candidato, NUNCA luz verde — o re-check do passo 11 e sempre sequencial e fresco.
+- **Vies pro-cauda-media (heuristica de saturacao):** prefira repos de 500-8k estrelas SEM campanha de outreach. Repos hype (litellm) e de cold-outreach (future-agi mandou email em massa p/ contribuidores) recebem PR em HORAS — voce perde a corrida por lentidao. O sweep paralelo em ~6 repos de cauda-media foi o padrao vencedor da sessao #5451 (todos os leads de litellm/future-agi ja tinham PR; o mid-tail entregou).
+- **Descarte fazenda de issues de IA:** repos com centenas de issues templatizadas por bot (ex.: `imDarshanGK/AI-dev-assistant` "Add keyboard shortcuts to X") = ruido, pular. E issue muito detalhada escrita por IA (file:linha + fix ja desenhado) e mais facil E mais arriscada em duplicata.
 - **Fonte extra: post-mortem de PR/issue fechado.** Seus PRs recem-fechados/rejeitados e issues de bot
   fechadas como "invalid" frequentemente escondem um bug adjacente real — OU confirmam que o maintainer
   estava certo. Protocolo:
@@ -35,7 +37,8 @@ Siga `references/anti-duplicate.md` na integra para cada issue promissora. Em re
 ## 3. Vet tractabilidade
 
 - Bug real, reproduzivel, escopo S/M. Ler o corpo: tem repro? E bug ou pedido de feature vago/suporte?
-- Preferir a area onde voce tem fit (pricing/model_info no litellm, schema/types no pydantic-ai/fastmcp, etc.).
+- **Confirme que o bug ainda existe no `upstream/main` ANTES de investir** (gate universal). Issue estagnada pode ja estar fixada e nao fechada — future-agi#671 foi corrigida ~1h apos aberta e ficou aberta. Leia o codigo/shape ofensor no main atual, nao so o corpo da issue.
+- Preferir a area onde voce tem fit (pricing/model_info no litellm, schema/types no pydantic-ai/fastmcp, gateway/proxy no mcp-context-forge, etc.).
 
 ## 4. Regra do repo (repo-rules.md)
 

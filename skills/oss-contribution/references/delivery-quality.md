@@ -28,12 +28,27 @@ REQUIRED SUB-SKILL: **superpowers:test-driven-development**.
 
 ## 4. Gates de qualidade padrao (SEMPRE, antes de abrir/atualizar PR)
 
-Rode TODOS, nao so o seu teste:
+**Enumere os gates REAIS do repo** lendo `tox.ini` / `Makefile` / workflow de CI — nao assuma so ruff.
+Ex. (mcp-context-forge): `ruff check` + `black --check` + `isort --check` + `bandit` + `pytype` +
+`pylint` + **doctest** (`pytest --doctest-modules <pkg>`). Rode TODOS, nao so o seu teste:
 
 - **Suite afetada completa** do repo (`uv run pytest <area>` / `python -m pytest <area>`), nao so 1 teste.
-- **Lint + format**: `ruff check <files>` e `ruff format --check <files>`.
-- **Typecheck** quando o repo tem: `make typecheck-pyright` (pydantic-ai) ou equivalente — `ruff` NAO pega exaustividade.
+- **Lint/format/typecheck** conforme o repo: ruff, black, isort, pylint, bandit, pyright/pytype.
+  `ruff` NAO pega exaustividade — rode o typecheck real (`make typecheck-pyright`, `pytype`, etc.).
+- **Doctest**: se o CI roda `pytest --doctest-modules <pkg>`, um fix numa funcao com bloco `Examples:`
+  no docstring precisa manter os doctests verdes (facil esquecer; o CI pega).
+- Tool que so roda em Linux (pytype no Windows)? Rode via Docker (env-tooling.md) OU declare e valide via Draft PR.
 - Separe falha pre-existente de culpa sua (checkout `upstream/main` limpo — blast-radius.md).
+
+### 4b. Novos-problemas-vs-upstream (linter com divida pre-existente)
+
+Linter reclama do arquivo inteiro (isort/pylint/ruff-format/black) mesmo com suas linhas limpas?
+Prove que voce nao adicionou nada novo: rode o tool no seu working file E na versao
+`git show upstream/<base>:<path>` colocada **no caminho in-repo** (a config e relativa ao path —
+`/tmp` perde `[tool.isort]`/`.pylintrc` e da falso-alarme: sessao #5451 deu 37 hunks no /tmp vs 3
+in-repo). Contagem igual => zero problema novo seu => **NAO reformate divida alheia** (scope creep);
+corrija so suas linhas. (Sessao #5451: isort 3==3, pylint 0==0 -> nao toquei em nada.) O gotcha
+ruff-format do litellm em env-tooling.md e um caso particular disto.
 
 ## 5. Convencoes de contribuicao do repo
 

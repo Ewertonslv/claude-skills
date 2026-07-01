@@ -67,6 +67,8 @@ Leia a reference quando o gate disparar:
 | "So regenerar os snapshots p/ ficar verde" | Mudanca semantica => DRAFT + perguntar ao maintainer. |
 | "CI lint/budget vermelho, meu codigo ta errado" | Cheque staleness da branch primeiro; merge da base. |
 | "A issue ta livre, abre o PR" | RE-CHECK agora: busca por keyword de titulo + assignees. |
+| "Issue limpa, repo famoso, bora" | Repo saturado/outreach: bug fresco vira PR em horas. Verifique se ja nao esta fixado no `main` + re-check imediato antes do push. |
+| "So deixar o CI ficar verde depois" | Enumere os gates do CI (tox/Makefile) e rode local; Draft PR so pros que so existem no Linux. |
 | "O bot sugeriu o fix, cola" | Escreva seu PROPRIO body + adicione o teste que falta. |
 | "Encaminhar esse param e inofensivo" | Pergunte o que mais flui por ele (routing-control bypass). |
 | "Adicionar Co-Authored-By Claude" | NAO. Autora so como Ewerton Silva. |

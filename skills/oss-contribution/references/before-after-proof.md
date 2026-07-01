@@ -28,6 +28,14 @@ Variante quando o fix nao da pra isolar por arquivo (ex.: 1 arquivo com fix+test
 - **Falha sem o fix, passa com o fix** -> prova valida. Pode submeter (apos os outros gates).
 - **Passa mesmo SEM o fix** -> o teste NAO exercita o bug. NAO submeta. Refaca o teste ou conclua que o bug nao e unit-testavel.
 
+## Simular o momento (impacto visivel ao cliente)
+
+Quando o SINTOMA e engolido por uma camada externa (o transport captura a excecao e retorna vazio),
+o teste unitario prova o `raise` mas nao o impacto ao usuario. Complemente com um repro pequeno que
+imita a camada consumidora (try/except -> retorna vazio) e IMPRIME o que o cliente recebe; rode com o
+fix em `stash` vs aplicado. Sessao #5451: ANTES o cliente via `text=''` (AttributeError engolido pelo
+transport), DEPOIS `text='hello from remote'`. Otimo pro corpo do PR e pra confianca de quem revisa.
+
 ## Gate "sem PR fraco"
 
 Se o bug **nao e reproduzivel em teste** (ex.: vazamento de socket que so ocorre atras de reverse-proxy, race ambiente-especifica), NAO abra um PR "adicionei um finally, confia". Em vez disso, poste um **comentario diagnostico de alta qualidade** na issue:
