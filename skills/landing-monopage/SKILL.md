@@ -125,3 +125,4 @@ Monte a proposta (faixas de mercado atuais + modelo pronto pra enviar) e as inst
 - `design-system/profissoes/` — 26 fichas por profissão + `_INDEX.md`.
 - `references/tecnicas-fotos-preview.md` — recorte de imagens + screenshots headless.
 - `references/proposta-e-deploy.md` — faixas de mercado, modelo de proposta, publicação.
+- `examples/` — saídas geradas (fictícias) pra referência; ex.: `advogado-tribuna/` mostra tema claro + CTA duplo + processo numerado.
