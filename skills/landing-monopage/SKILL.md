@@ -26,14 +26,15 @@ Você passa alguns dados do cliente e esta skill gera uma **mono-page profission
 - O site do cliente vive em `C:\Users\Ewerton\Documents\Projetos github\<slug-cliente>\` (ou onde o usuário indicar), **fora** de `C:\Projetos\` (Viggo).
 - **Arquivos sempre em UTF-8** (com acentos diretos: á, ç, ã). Nada de ANSI.
 
-## Fundação + briefs por profissão (a ideia central)
+## Fundação + design system (a ideia central)
 
-A skill separa **o que é igual** de **o que muda por profissão**:
+A skill separa **o que é técnico**, **o que é família de design** e **o que é nicho** — 3 camadas:
 
 - **`foundation/`** — o esqueleto técnico, neutro de nicho: reset, tokens de cor (CSS vars), header com menu mobile + scroll-spy, herói, lista de serviços editorial, prova social, depoimentos, contato com WhatsApp, rodapé, FAB do WhatsApp, acessibilidade (`:focus-visible`, `prefers-reduced-motion`, progressive enhancement) e SEO (JSON-LD, OG). **Copie e preencha; não reescreva do zero.**
-- **`briefs/<profissao>.md`** — a **direção de design** daquele nicho: lane estética, estratégia de paleta, par de fontes (fugindo dos clichês), tom de copy, seções e ênfase, estilo de imagem. É a "pele".
+- **`design-system/arquetipos/`** — 6 **famílias de design** (cuidado-premium, autoridade-sobria, desejo-visual, energia-movimento, sabor-experiencia, oficio-confianca), cada uma com **2-3 combos** prontos de paleta (contraste AA validado) + fontes anti-clichê + tom + prova social.
+- **`design-system/profissoes/`** — 26 **fichas finas** por profissão (arquétipo + combo default, serviços típicos, schema.org, credencial/regulatório, clichê a evitar).
 
-> Um dentista e um advogado usam a **mesma fundação** com **briefs diferentes** → saem visualmente distintos. Para um nicho novo, crie `briefs/<novo>.md` (ver `briefs/README.md`).
+> Dois clientes do mesmo nicho **rotacionam o combo** → não saem iguais. Fluxo completo e contratos: **`design-system/README.md`**. Nicho novo: copie uma ficha próxima e registre no `_INDEX.md`.
 
 ## Dados de entrada (o que pedir ao usuário)
 
@@ -57,18 +58,24 @@ Colete o que existir; o que faltar vira **placeholder com TODO visível** (nunca
 ## Pipeline
 
 ```
-0 profissão → brief   1 dados   2 identidade   3 gerar site
+0 profissão → ficha+arquétipo   1 dados   2 combo   3 gerar site
       4 fotos   5 impeccable (validar design)   6 preview   7 proposta + deploy
 ```
 
-### PASSO 0 — Resolver a profissão e ler o brief
-Se o argumento (`/landing-monopage dentista`) ou os dados indicam a profissão, **leia `briefs/<profissao>.md`**. Se não houver brief para o nicho, use o mais próximo e crie um novo seguindo `briefs/README.md`. O brief é **obrigatório** — sem ele o design sai genérico.
+### PASSO 0 — Resolver a profissão (ficha → arquétipo)
+Se o argumento (`/landing-monopage dentista`) ou os dados indicam a profissão, ache-a no
+`design-system/profissoes/_INDEX.md` e **leia a ficha + o arquétipo que ela aponta**. Nicho
+sem ficha → use a mais próxima da família e crie a nova (`design-system/README.md`). A dupla
+ficha+arquétipo é **obrigatória** — sem ela o design sai genérico.
 
 ### PASSO 1 — Coletar os dados
 Peça os campos da tabela acima (ou receba de um manifesto do usuário). Campo ausente → placeholder com comentário `<!-- TODO: ... -->` e um fallback visível (ex.: monograma no lugar da foto, "a confirmar" no endereço).
 
-### PASSO 2 — Definir a identidade (anti-genérico)
-Do brief, escolha **paleta** (estratégia: restrained/committed/drenched) e **par de fontes**. **Fuja da lista reflex-reject da impeccable** (Playfair, Inter, Fraunces, Cormorant, DM Sans…). Defina as CSS vars (`--brand`, `--bg`, `--surface`, `--ink`, `--accent`) no `:root`. Cor de saúde/ERP nunca por reflexo — decida pela cena do brief.
+### PASSO 2 — Escolher o combo (anti-genérico)
+Do arquétipo, escolha o **combo** (paleta AA-validada + fontes): o que casa com a marca do
+cliente, ou o default da ficha — e **rotacione se já usou esse combo em outro cliente do
+mesmo nicho**. Aplique os tokens no `:root` da foundation + a URL de fontes no `<link>`.
+Nunca fontes da lista proibida (`design-system/README.md` § Regras duras).
 
 ### PASSO 3 — Gerar o site
 Crie a pasta do cliente e **copie `foundation/`** para lá. Depois:
@@ -113,6 +120,8 @@ Monte a proposta (faixas de mercado atuais + modelo pronto pra enviar) e as inst
 
 ## Arquivos da skill
 - `foundation/` — esqueleto (index.html, style.css, script.js).
-- `briefs/<profissao>.md` — direção de design por nicho (+ `README.md` pra criar novos).
+- `design-system/README.md` — contrato + fluxo de resolução (ficha → arquétipo → combo).
+- `design-system/arquetipos/` — 6 famílias de design com 2-3 combos cada.
+- `design-system/profissoes/` — 26 fichas por profissão + `_INDEX.md`.
 - `references/tecnicas-fotos-preview.md` — recorte de imagens + screenshots headless.
 - `references/proposta-e-deploy.md` — faixas de mercado, modelo de proposta, publicação.
