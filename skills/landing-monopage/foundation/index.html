@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- TODO: title + description por cliente -->
+  <title>{{NOME}} — {{PROFISSAO}}</title>
+  <meta name="description" content="{{NOME}}, {{PROFISSAO}}. {{SERVICOS_RESUMO}}. Agende pelo WhatsApp.">
+  <meta name="theme-color" content="{{BG_HEX}}">
+
+  <!-- Favicon inline (iniciais). TODO: trocar cores/letras -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23C9A35C' text-anchor='middle'%3E{{INICIAIS}}%3C/text%3E%3C/svg%3E">
+
+  <!-- Open Graph. TODO: og:url e og:image quando publicar -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{NOME}} — {{PROFISSAO}}">
+  <meta property="og:description" content="{{SERVICOS_RESUMO}}. Agende pelo WhatsApp.">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- <link rel="canonical" href="https://SEU-DOMINIO"> -->
+
+  <!-- Dados estruturados (SEO local). TODO: @type por profissão (Dentist, LegalService, HealthAndBeautyBusiness, ExerciseGym...), telephone, address, url -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "{{NOME}}",
+    "description": "{{SERVICOS_RESUMO}}",
+    "areaServed": "{{CIDADE}}"
+  }
+  </script>
+
+  <!-- Fontes: TODO trocar pelo par do brief (fuja de Playfair/Inter/Fraunces/DM) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="{{GOOGLE_FONTS_URL}}" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <div class="container site-header-inner">
+      <a href="#hero" class="brand">{{NOME}}</a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#prova">Resultados</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <a class="whatsapp-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden="true">
+      <path d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.6 1.9 6.5L4 29l7.7-1.9A11.9 11.9 0 0 0 16 27c6.6 0 12-5.4 12-12S22.6 3 16 3Zm0 21.8a9.7 9.7 0 0 1-4.9-1.4l-.4-.2-4.6 1.1 1.1-4.5-.2-.4A9.7 9.7 0 1 1 16 24.8Zm5.6-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.1-.7.2s-.8 1-.9 1.2-.4.2-.7 0c-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1s0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4c-.3.3-1.1 1-1.1 2.6s1.1 3 1.3 3.2 2.2 3.3 5.2 4.6c.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2.1-1.5s.3-1.3.2-1.5-.3-.2-.6-.4Z"/>
+    </svg>
+  </a>
+
+  <!-- HERO -->
+  <section id="hero" class="hero reveal">
+    <span class="hero-arc" aria-hidden="true"></span><!-- device de assinatura opcional (brief) -->
+    <div class="container hero-inner">
+      <div class="hero-photo-wrap">
+        <!-- TODO: <img class="photo-img" src="assets/retrato.jpg" alt="{{NOME}}" onerror="this.remove()"> -->
+        <div class="hero-photo photo-ph">
+          <img class="photo-img" src="assets/retrato.jpg" alt="{{NOME}}" onerror="this.remove()">
+          <span aria-hidden="true">{{INICIAIS}}</span>
+        </div>
+      </div>
+      <div class="hero-content">
+        <p class="eyebrow">{{PROFISSAO}}{{ · CREDENCIAL}}</p>
+        <h1>{{NOME}}</h1>
+        <p class="hero-tagline">{{TAGLINE}}</p>
+        <p class="hero-subtext">{{SERVICOS_RESUMO}} em {{CIDADE}}.</p>
+        <a class="btn-primary" id="cta-hero" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE (texto; sem foto se ela já está no herói) -->
+  <section id="sobre" class="sobre reveal">
+    <div class="container sobre-inner">
+      <div class="sobre-content">
+        <h2>Sobre</h2>
+        <span class="sobre-rule" aria-hidden="true"></span>
+        <p>{{SOBRE_P1}}</p>
+        <p>{{SOBRE_P2}}</p>
+        <ul class="selos">
+          <li class="selo">{{SELO_1}}</li>
+          <li class="selo">{{SELO_2}}</li>
+          <li class="selo">{{SELO_3}}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS (lista editorial — NÃO cards idênticos) -->
+  <section id="servicos" class="servicos reveal">
+    <div class="container">
+      <h2>Serviços</h2>
+      <p class="section-subtitle">{{SERVICOS_SUBTITULO}}</p>
+      <div class="servicos-lista">
+        <!-- Repita <article> por serviço. Ícone line-svg simples (stroke currentColor) -->
+        <article class="servico-item">
+          <svg class="servico-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="16"/><path d="M18 24l4 4 8-9"/></svg>
+          <div class="servico-texto">
+            <h3>{{SERVICO_NOME}}</h3>
+            <p>{{SERVICO_DESC}}</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVA SOCIAL: antes/depois OU galeria de trabalhos (escolha pelo brief) -->
+  <section id="prova" class="prova reveal">
+    <div class="container">
+      <h2>Resultados</h2>
+      <p class="section-subtitle">{{PROVA_SUBTITULO}}</p>
+      <!-- Variante antes/depois (1 foto combinada): -->
+      <figure class="ba-figure">
+        <img class="ba-photo" src="assets/antes-depois.jpg" alt="{{PROVA_ALT}}"
+             onerror="this.closest('.ba-figure').classList.add('ba-vazio')">
+        <span class="tag-a ba-tag ba-tag-a">Antes</span>
+        <span class="tag-b ba-tag ba-tag-b">Depois</span>
+        <span class="ba-fallback">Imagem em breve</span>
+      </figure>
+      <p class="disclaimer">Imagens ilustrativas — resultados variam de caso a caso.</p>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS (só reais/autorizados) -->
+  <section id="depoimentos" class="depoimentos reveal">
+    <div class="container">
+      <h2>Depoimentos</h2>
+      <p class="section-subtitle">{{DEPO_SUBTITULO}}</p>
+      <div class="depoimentos-grid">
+        <div class="depoimento-card">
+          <span class="depoimento-aspas" aria-hidden="true">&#10077;</span>
+          <p class="depoimento-texto">{{DEPO_TEXTO}}</p>
+          <p class="depoimento-autor">— {{DEPO_AUTOR}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="contato reveal">
+    <div class="container">
+      <h2>{{CONTATO_TITULO}}</h2>
+      <p class="section-subtitle">Fale agora pelo WhatsApp.</p>
+      <a class="btn-primary" id="cta-contato" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <div class="social-links">
+        <a id="link-instagram" class="social-link" href="#" target="_blank" rel="noopener">
+          <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          <span>{{INSTAGRAM}}</span>
+        </a>
+      </div>
+      <div class="contato-info">
+        <p class="contato-info-item">Endereço: {{ENDERECO}}</p>
+        <p class="contato-info-item">Atendimento: {{HORARIO}}</p>
+      </div>
+      <!-- TODO: iframe Google Maps quando tiver endereço -->
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-nome">{{NOME}}</p>
+      <p class="footer-cargo">{{PROFISSAO}}{{ · CREDENCIAL}}</p>
+      <p class="footer-copy">&copy; {{ANO}} {{NOME}}. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

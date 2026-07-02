@@ -1,0 +1,68 @@
+# Proposta comercial + Deploy
+
+> Preços mudam. **Antes de fechar valores, rode um `WebSearch`** ("quanto cobrar landing page <ano>", "quanto cobrar site dentista/advogado <ano>", "manutenção mensal site <ano>") e atualize as faixas. As abaixo são referência BR 2026.
+
+## Faixas de mercado (BR, 2026)
+
+**Criação (único):**
+- One-page comum: R$ 970–1.500 · básica R$ 500–2.000 · pequena empresa R$ 800–3.320
+- Freelancer landing (recomendado): R$ 1.000–1.500
+- **Site custom para profissional** (design próprio, fotos, SEO, WhatsApp): **R$ 1.500–2.500** ← é o que esta skill entrega
+- Agência R$ 2.000–4.000+ · personalizado R$ 4.500–8.000
+
+**Recorrente (host + manutenção):**
+- Manutenção mensal site simples: R$ 100–500/mês
+- Hospedagem: compartilhada R$ 10–50/mês · pacote (host+domínio+SSL+suporte) R$ 100–400/mês
+- Domínio `.com.br`: ~R$ 40/ano
+
+## Recomendação de precificação (3 níveis)
+
+| Nível | Criação | Mensal |
+|---|---|---|
+| Entrada | R$ 1.500 | R$ 100/mês |
+| **Recomendado** | **R$ 1.800** (ou 2×950) | **R$ 120/mês** (ou R$ 1.200/ano) |
+| Premium (+ domínio, Google Meu Negócio, setup tráfego) | R$ 2.500 | R$ 150/mês |
+
+**O ouro do servidor próprio (Hetzner):** um VPS (~R$ 30/mês) hospeda vários clientes → cobrar R$ 100–150/mês por site é margem alta. **Venda por valor** ("capta paciente/cliente pelo WhatsApp 24h"), não por horas.
+
+## Modelo de proposta (ajuste números e envie)
+
+```
+Olá, {NOME}! 😊
+Segue a proposta do site profissional.
+
+✅ INCLUÍDO
+• Landing page profissional, one-page, design exclusivo (não é template)
+• 100% responsiva (perfeita no celular)
+• Botão de WhatsApp com mensagem automática
+• Seções: Início, Sobre, {Serviços/Áreas}, {Resultados/Portfólio}, Depoimentos, Contato
+• Fotos tratadas + otimizado para o Google (SEO local, aparece nas buscas)
+• Rápido e seguro (SSL/https)
+
+💵 INVESTIMENTO
+• Criação (único): R$ 1.800 — ou 2x de R$ 950
+• Mensalidade: R$ 120/mês — hospedagem, domínio, segurança e manutenção
+  (pequenos ajustes de foto/horário/promoção inclusos) · Anual: R$ 1.200 (2 meses grátis)
+
+🎯 POR QUE VALE
+O site trabalha por você 24h captando clientes pelo WhatsApp.
+
+📌 PRÓXIMO PASSO
+Me envie {dados que faltam: endereço, horário, depoimentos reais, fotos}.
+Publico em até X dias após os dados.
+```
+Opcional: gerar a proposta como **Artifact/HTML** (link bonito) — carrega o mesmo profissionalismo do preview.
+
+## Deploy
+
+**Rápido (preview p/ cliente) — Netlify Drop:** arraste a pasta em app.netlify.com/drop → URL na hora. Zero build.
+
+**Uma linha — Surge:** `npx surge` na pasta (1ª vez pede login; é interativo).
+
+**Servidor do usuário (Hetzner):** é site estático → basta servir a pasta.
+- Nginx: aponte um `server{}` com `root /var/www/<cliente>; index index.html;` + SSL via Certbot (Let's Encrypt).
+- Um VPS serve N clientes (um bloco/virtualhost por domínio). Domínio `.com.br` no registro.br apontando pro IP do VPS.
+
+**Permanente grátis — GitHub Pages:** repo do cliente → Settings → Pages → branch/root. Link `usuario.github.io/<repo>`.
+
+> Antes de mandar o link, alinhe com o cliente o que ainda é **placeholder** (endereço/horário "a confirmar", depoimentos de exemplo) pra não passar impressão de inacabado.
