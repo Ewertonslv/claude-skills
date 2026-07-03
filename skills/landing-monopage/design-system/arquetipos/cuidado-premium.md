@@ -25,6 +25,10 @@ Quando usar: procedimento estético de ticket alto; cliente quer "premium".
 Fontes: **Marcellus** (display) + **Karla** (corpo)
 `https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@400;500;600;700&display=swap`
 Quando usar: saúde funcional/vitalidade; cliente quer leveza e luz.
+Atenção (lições do critique): **accent terracota = só decoração** (2.95:1 no bg — nunca
+texto; usar em réguas/aspas/detalhes). **Marcellus só tem 400** — nunca faux-bold (checar
+`.hero h1`/`.brand` da foundation). Tema claro: sombras a 10-22% tingidas do ink (não
+rgba(0,0,0,.35+)), radiais de brand em ~.08-.18, header/nav com fundos claros.
 
 ### 3. `acolhida` — blush terroso (default p/ psicólogo, terapias)
 ```css

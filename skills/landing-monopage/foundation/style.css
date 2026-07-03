@@ -50,6 +50,11 @@ section[id] { scroll-margin-top: 70px; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
 }
 
+/* ===== Sem JS: nav visível e header legível (progressive enhancement) ===== */
+html:not(.js) .nav-toggle { display: none; }
+html:not(.js) .site-nav { display: flex !important; flex-wrap: wrap; gap: 1rem 1.25rem; }
+html:not(.js) .site-header { background: var(--bg); border-bottom-color: rgba(var(--brand-rgb), .15); }
+
 /* ===== Header / nav ===== */
 .site-header {
   position: sticky; top: 0; z-index: 40; background: transparent;
