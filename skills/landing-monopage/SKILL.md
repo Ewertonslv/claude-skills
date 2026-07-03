@@ -2,7 +2,7 @@
 name: landing-monopage
 description: Use quando o usuário quer criar uma landing page / mono-page (site de uma página só) para um cliente ou negócio local — dentista, advogado, salão, estética, academia, personal, restaurante, clínica — normalmente como trabalho freelancer. Também para gerar orçamento/proposta comercial de site e instruções de publicação (Netlify, Hetzner). Ativa em: "criar site pro meu cliente", "fazer uma landing", "monta uma mono page", "quanto cobrar por um site", "publicar site do cliente". Trabalho pessoal/freelance — nunca misturar com a Viggo.
 user_invocable: true
-argument-hint: "[dentista|advogado|salao|academia|<profissao>]"
+argument-hint: "[<profissao> | --manifest <caminho/cliente.yaml>]"
 allowed-tools:
   - Bash
   - PowerShell
@@ -68,8 +68,13 @@ Se o argumento (`/landing-monopage dentista`) ou os dados indicam a profissão, 
 sem ficha → use a mais próxima da família e crie a nova (`design-system/README.md`). A dupla
 ficha+arquétipo é **obrigatória** — sem ela o design sai genérico.
 
-### PASSO 1 — Coletar os dados
-Peça os campos da tabela acima (ou receba de um manifesto do usuário). Campo ausente → placeholder com comentário `<!-- TODO: ... -->` e um fallback visível (ex.: monograma no lugar da foto, "a confirmar" no endereço).
+### PASSO 1 — Coletar os dados (manifest-first)
+**Com `--manifest <caminho/cliente.yaml>`**: leia o manifest e NÃO entreviste — rode o
+pipeline inteiro direto (é o modo automatizado; contrato em `templates/cliente.yaml`).
+**Sem manifest**: pergunte os campos da tabela acima **e GERE o `cliente.yaml` preenchido**
+na pasta do cliente (a coleta nunca se perde; roteiro de perguntas pro WhatsApp em
+`references/cenario-cliente-novo.md`). Campo ausente → placeholder com `<!-- TODO: ... -->`
+e fallback visível (monograma no lugar da foto, "a confirmar" no endereço).
 
 ### PASSO 2 — Escolher o combo (anti-genérico)
 Do arquétipo, escolha o **combo** (paleta AA-validada + fontes): o que casa com a marca do
@@ -99,7 +104,20 @@ Depois, passe a página pela skill **cro** (se instalada): proposta de valor, he
 Abra no navegador do usuário e gere screenshots (desktop + mobile) pra conferência. **Ver `references/tecnicas-fotos-preview.md`** (headless Chrome, truque do `min-height` do herói, gotcha da âncora).
 
 ### PASSO 7 — Proposta comercial + deploy
-Monte a proposta (faixas de mercado atuais + modelo pronto pra enviar) e as instruções de publicação (Netlify Drop rápido, ou Hetzner/servidor do usuário). **Ver `references/proposta-e-deploy.md`.**
+Monte a proposta (faixas de mercado atuais + modelo pronto pra enviar) e publique:
+**deploy de 1 comando no Hetzner** = `scripts/deploy-hetzner.sh <pasta> <dominio>`
+(upload + vhost nginx + SSL; use `--dry-run` pra conferir antes; config SSH em
+`~/.config/landing-deploy.env`). Alternativa rápida de preview: Netlify Drop.
+**Ver `references/proposta-e-deploy.md`.**
+
+## Estágios e gates (fluxo de cliente)
+
+Cada cliente tem `cliente.yaml` + `STATUS.md` (templates em `templates/`) na pasta dele em
+`sites-clientes/`. Estágios: `LEAD → BRIEFING → RASCUNHO → APROVAÇÃO → PUBLICADO → TRÁFEGO`.
+**Leia o STATUS.md antes de agir** e só execute o que o estágio libera — em especial:
+**tráfego pago SÓ em PUBLICADO** (domínio no ar + dados reais + TCLE + pixel); `cro` e
+`copywriting` já valem no RASCUNHO; `prospecting`/`cold-email`/`offers` são pré-cliente.
+Fluxo completo + roteiro de perguntas: **`references/cenario-cliente-novo.md`**.
 
 ## Armadilhas — PARE e corrija (aprendidas na prática)
 
@@ -122,6 +140,9 @@ Monte a proposta (faixas de mercado atuais + modelo pronto pra enviar) e as inst
 
 ## Arquivos da skill
 - `foundation/` — esqueleto (index.html, style.css, script.js).
+- `templates/cliente.yaml` — contrato do manifest de cliente · `templates/STATUS.md` — estágios/gates.
+- `scripts/deploy-hetzner.sh` — publica no VPS em 1 comando (nginx+SSL, `--dry-run` disponível).
+- `references/cenario-cliente-novo.md` — fluxo ponta-a-ponta do cliente + roteiro de perguntas.
 - `design-system/README.md` — contrato + fluxo de resolução (ficha → arquétipo → combo).
 - `design-system/arquetipos/` — 6 famílias de design com 2-3 combos cada.
 - `design-system/profissoes/` — 26 fichas por profissão + `_INDEX.md`.

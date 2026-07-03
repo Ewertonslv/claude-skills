@@ -1,0 +1,46 @@
+# Manifest do cliente — contrato de entrada da skill landing-monopage
+# Copie para sites-clientes/<slug>/cliente.yaml e preencha na conversa com o cliente.
+# Campo vazio ("") = vira placeholder com TODO no site (nunca inventar).
+# Roteiro de perguntas pro WhatsApp: references/cenario-cliente-novo.md
+
+slug: ""                    # pasta do cliente (kebab-case), ex: dr-rodrigo-dantas
+estagio: BRIEFING           # LEAD | BRIEFING | RASCUNHO | APROVACAO | PUBLICADO | TRAFEGO
+
+# --- Identidade ---
+nome: ""                    # ex: Dr. Rodrigo Dantas
+profissao: ""               # chave do design-system/profissoes/_INDEX.md, ex: dentista
+credencial: ""              # ex: CRO/RN 8383 (vazio se não houver)
+tagline: ""                 # frase do herói; vazio = a skill propõe 3 e você escolhe
+cidade: ""                  # ex: Natal/RN
+
+# --- Contato ---
+whatsapp: ""                # 55 + DDD + número, só dígitos, ex: "5584996888662"
+telefone: ""                # fixo p/ CTA "ligar" (nichos autoridade-sobria), ex: "+558430000000"
+instagram: ""               # URL completa, ex: https://instagram.com/rodrigodantas1
+endereco: ""                # rua, nº, bairro
+horario: ""                 # ex: Seg a Sex, 8h às 18h
+maps_iframe: ""             # iframe do Google Maps (opcional)
+dominio: ""                 # ex: drrodrigodantas.com.br (necessário p/ PUBLICADO)
+
+# --- Conteúdo ---
+servicos:                   # os que o cliente REALMENTE oferece (cheque flyer/Instagram)
+  - nome: ""
+    descricao: ""
+depoimentos:                # SÓ reais e autorizados; vazio = seção com exemplo marcado TODO
+  - texto: ""
+    autor: ""
+fotos:
+  retrato: ""               # caminho no disco da foto do profissional
+  prova: ""                 # antes/depois combinado OU pasta de galeria
+  autorizacao_tcle: false   # true só com termo assinado (obrigatório p/ saúde)
+
+# --- Marca (opcional; vazio = combo default da ficha da profissão) ---
+marca:
+  combo: ""                 # nome do combo do arquétipo, ex: clareira (força a escolha)
+  cor: ""                   # cor da marca existente, ex: "#2e6e5e" (adapta --brand)
+
+# --- Tráfego pago (preenche quando chegar no estágio TRAFEGO) ---
+trafego:
+  business_manager: false   # cliente já tem BM?
+  pixel_id: ""              # ID do Meta Pixel quando criado
+  verba_dia: ""             # ex: "25" (R$/dia)

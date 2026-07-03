@@ -1,0 +1,49 @@
+# STATUS — {{NOME}} ({{slug}})
+
+**Estágio atual:** BRIEFING
+_(atualize a linha acima e marque os gates conforme avança; a skill lê este arquivo)_
+
+## Estágios e gates
+
+### 1. LEAD → BRIEFING
+- [ ] Cliente respondeu e topou conversar
+- [ ] Roteiro de perguntas enviado (references/cenario-cliente-novo.md)
+
+### 2. BRIEFING → RASCUNHO
+- [ ] `cliente.yaml` preenchido (mínimo: nome, profissao, cidade, whatsapp, servicos)
+- [ ] Fotos recebidas (ou combinado que virão depois)
+
+### 3. RASCUNHO → APROVAÇÃO
+- [ ] Site gerado (`/landing-monopage --manifest`)
+- [ ] impeccable validado (design) + cro validado (conversão)
+- [ ] Preview enviado ao cliente (screenshots ou link temporário)
+
+### 4. APROVAÇÃO → PUBLICADO
+- [ ] Cliente aprovou o visual
+- [ ] Proposta aceita (valores fechados)
+- [ ] Dados finais no site: endereço, horário, depoimentos reais
+- [ ] TCLE/autorizações de imagem assinados (obrigatório saúde)
+- [ ] Domínio registrado (registro.br) e apontado
+- [ ] Deploy feito (`scripts/deploy-hetzner.sh`) + SSL ok + og:url/og:image preenchidos
+
+### 5. PUBLICADO → TRÁFEGO
+- [ ] Business Manager do cliente + acesso de parceiro pra mim
+- [ ] Pixel criado e instalado (descomentar bloco no index.html + testar Pixel Helper)
+- [ ] Domínio verificado no BM
+- [ ] Criativos prontos (vídeo + fotos, SEM antes/depois lado a lado)
+- [ ] Verba definida + cartão do cliente na conta
+- [ ] Campanha no ar (PLANO-TRAFEGO.md)
+
+## O que roda em cada estágio
+
+| Estágio | Liberado | Bloqueado |
+|---|---|---|
+| LEAD | prospecting, cold-email, offers | tudo do cliente |
+| BRIEFING | roteiro de perguntas, proposta preliminar | gerar site (falta manifest) |
+| RASCUNHO | gerar site, copywriting, impeccable, **cro** | deploy, tráfego |
+| APROVAÇÃO | ajustes, proposta final, preparar domínio | tráfego |
+| PUBLICADO | deploy, SEO local, Google Meu Negócio | anúncio só com TCLE+pixel |
+| TRÁFEGO | ads, ad-creative, analytics, rotina semanal | — |
+
+## Log
+- {{DATA}}: cliente criado
