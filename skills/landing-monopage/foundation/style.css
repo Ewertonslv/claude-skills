@@ -10,6 +10,7 @@
   --font-display: 'Bodoni Moda', serif;  /* TODO: par do brief */
   --font-body: 'Mulish', system-ui, sans-serif;
   --brand-rgb: 201, 163, 92;  /* --brand em rgb p/ rgba() */
+  --bg-rgb: 18, 20, 26;       /* --bg em rgb (header/scrims — atualizar junto com --bg) */
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,7 +29,7 @@ body {
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 600; /* display 400-only (Marcellus/Italiana)? use 400 — nunca faux-bold */
   letter-spacing: -0.02em;
   line-height: 1.12;
   font-optical-sizing: auto;
@@ -62,7 +63,7 @@ html:not(.js) .site-header { background: var(--bg); border-bottom-color: rgba(va
   transition: background-color .25s ease, border-color .25s ease;
 }
 .site-header.scrolled {
-  background: rgba(0,0,0,.6);
+  background: rgba(var(--bg-rgb), .75);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   border-bottom-color: rgba(var(--brand-rgb), .2);
 }
@@ -80,7 +81,7 @@ html:not(.js) .site-header { background: var(--bg); border-bottom-color: rgba(va
 .site-nav.open {
   display: flex; flex-direction: column; align-items: stretch; gap: .15rem;
   position: absolute; top: 100%; left: 0; right: 0; padding: .5rem 1.25rem 1rem;
-  background: rgba(0,0,0,.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  background: rgba(var(--bg-rgb), .97); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(var(--brand-rgb), .2); box-shadow: 0 12px 24px rgba(0,0,0,.35);
 }
 .site-nav a { color: var(--muted); font-size: .9rem; font-weight: 500; padding: .5rem .1rem; transition: color .2s ease; }
@@ -140,13 +141,16 @@ html:not(.js) .site-header { background: var(--bg); border-bottom-color: rgba(va
 
 /* ===== Serviços — lista editorial (não cards idênticos) ===== */
 .servicos-lista { max-width: 760px; margin-inline: auto; }
-.servico-item { display: flex; align-items: center; gap: 1.5rem; padding: 1.75rem .5rem; border-top: 1px solid rgba(var(--brand-rgb), .18); transition: padding-left .25s ease, background-color .25s ease; }
+.servico-item { display: flex; align-items: center; gap: 1.5rem; padding: 1.75rem .5rem; border-top: 1px solid rgba(var(--brand-rgb), .18); transition: background-color .25s ease; }
+.servico-icon, .servico-texto { transition: transform .25s ease; }
+.servico-item:hover .servico-icon, .servico-item:hover .servico-texto,
+.servico-item:focus-within .servico-icon, .servico-item:focus-within .servico-texto { transform: translateX(.75rem); }
 .servico-item:last-child { border-bottom: 1px solid rgba(var(--brand-rgb), .18); }
-.servico-item:hover, .servico-item:focus-within { padding-left: 1.25rem; background: linear-gradient(90deg, rgba(var(--brand-rgb), .07), transparent 65%); }
+.servico-item:hover, .servico-item:focus-within { background: linear-gradient(90deg, rgba(var(--brand-rgb), .07), transparent 65%); }
 .servico-icon { color: var(--brand); flex-shrink: 0; }
 .servico-texto h3 { font-size: clamp(1.3rem, 3vw, 1.7rem); color: var(--ink); margin-bottom: .35rem; }
 .servico-texto p { color: var(--muted); font-size: .98rem; }
-@media (prefers-reduced-motion: reduce) { .servico-item { transition: background-color .25s ease; } .servico-item:hover, .servico-item:focus-within { padding-left: .5rem; } }
+@media (prefers-reduced-motion: reduce) { .servico-icon, .servico-texto { transition: none; } .servico-item:hover .servico-icon, .servico-item:hover .servico-texto { transform: none; } }
 
 /* ===== Prova — antes/depois enquadrado ===== */
 .ba-figure { position: relative; max-width: 680px; margin-inline: auto; min-height: 200px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(var(--brand-rgb), .35); box-shadow: 0 12px 28px rgba(0,0,0,.3); background: linear-gradient(160deg, var(--surface), var(--bg)); }
