@@ -39,6 +39,14 @@ marca:
   combo: ""                 # nome do combo do arquétipo, ex: clareira (força a escolha)
   cor: ""                   # cor da marca existente, ex: "#2e6e5e" (adapta --brand)
 
+# --- Financeiro (valores fechados na proposta; pagamentos registrados pelo painel) ---
+financeiro:
+  valor_site: 0               # ex: 1800
+  mensalidade: 0              # hospedagem/manutenção, ex: 120
+  setup_trafego: 0            # ex: 400 (0 = sem tráfego)
+  gestao_trafego_mes: 0       # ex: 600 (0 = sem gestão)
+  pagamentos: []              # o painel adiciona: - { data: 2026-07-10, valor: 900, ref: entrada }
+
 # --- Tráfego pago (preenche quando chegar no estágio TRAFEGO) ---
 trafego:
   business_manager: false   # cliente já tem BM?

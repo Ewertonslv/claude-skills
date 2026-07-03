@@ -1,17 +1,18 @@
 # STATUS — {{NOME}} ({{slug}})
 
 **Estágio atual:** BRIEFING
-_(atualize a linha acima e marque os gates conforme avança; a skill lê este arquivo)_
+_(atualize a linha acima e marque os gates conforme avança; a skill e o painel leem este arquivo)_
+_(convenção: gate com **(cliente)** no fim = depende do cliente; sem marca = depende de você)_
 
 ## Estágios e gates
 
 ### 1. LEAD → BRIEFING
-- [ ] Cliente respondeu e topou conversar
+- [ ] Cliente respondeu e topou conversar (cliente)
 - [ ] Roteiro de perguntas enviado (references/cenario-cliente-novo.md)
 
 ### 2. BRIEFING → RASCUNHO
 - [ ] `cliente.yaml` preenchido (mínimo: nome, profissao, cidade, whatsapp, servicos)
-- [ ] Fotos recebidas (ou combinado que virão depois)
+- [ ] Fotos recebidas, ou combinado que virão depois (cliente)
 
 ### 3. RASCUNHO → APROVAÇÃO
 - [ ] Site gerado (`/landing-monopage --manifest`)
@@ -19,19 +20,19 @@ _(atualize a linha acima e marque os gates conforme avança; a skill lê este ar
 - [ ] Preview enviado ao cliente (screenshots ou link temporário)
 
 ### 4. APROVAÇÃO → PUBLICADO
-- [ ] Cliente aprovou o visual
-- [ ] Proposta aceita (valores fechados)
-- [ ] Dados finais no site: endereço, horário, depoimentos reais
-- [ ] TCLE/autorizações de imagem assinados (obrigatório saúde)
+- [ ] Cliente aprovou o visual (cliente)
+- [ ] Proposta aceita — valores fechados (cliente)
+- [ ] Dados finais no site: endereço, horário, depoimentos reais (cliente)
+- [ ] TCLE/autorizações de imagem assinados — obrigatório saúde (cliente)
 - [ ] Domínio registrado (registro.br) e apontado
 - [ ] Deploy feito (`scripts/deploy-hetzner.sh`) + SSL ok + og:url/og:image preenchidos
 
 ### 5. PUBLICADO → TRÁFEGO
-- [ ] Business Manager do cliente + acesso de parceiro pra mim
+- [ ] Business Manager do cliente + acesso de parceiro pra mim (cliente)
 - [ ] Pixel criado e instalado (descomentar bloco no index.html + testar Pixel Helper)
 - [ ] Domínio verificado no BM
 - [ ] Criativos prontos (vídeo + fotos, SEM antes/depois lado a lado)
-- [ ] Verba definida + cartão do cliente na conta
+- [ ] Verba definida + cartão do cliente na conta (cliente)
 - [ ] Campanha no ar (PLANO-TRAFEGO.md)
 
 ## O que roda em cada estágio
