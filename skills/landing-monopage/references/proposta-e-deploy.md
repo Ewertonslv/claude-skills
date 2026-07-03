@@ -25,6 +25,26 @@
 
 **O ouro do servidor próprio (Hetzner):** um VPS (~R$ 30/mês) hospeda vários clientes → cobrar R$ 100–150/mês por site é margem alta. **Venda por valor** ("capta paciente/cliente pelo WhatsApp 24h"), não por horas.
 
+## 3ª perna — Gestão de tráfego pago (ver `trafego-pago.md`)
+
+| Item | Faixa iniciante (2026) | Observação |
+|---|---|---|
+| Setup (contas + pixel + 1ª campanha) | R$ 300–800 (sugestão R$ 400) | único |
+| Gestão mensal (1 conta) | R$ 500–1.500 (sugestão R$ 500–800) | seu honorário |
+| Verba de anúncio | R$ 600–1.500/mês (local, 1 plataforma) | **à parte, no cartão do cliente** |
+
+Combo completo (âncora de venda): **criação R$ 1.800 + R$ 120/mês (site) + R$ 600/mês (gestão) + verba do cliente**.
+Frase pro cliente: "o site é a vitrine; o tráfego é quem traz gente pra ela".
+Linha extra no modelo de proposta:
+
+```
+🚀 OPCIONAL — TRÁFEGO PAGO (anúncios no Instagram/Facebook)
+• Setup das contas e do pixel: R$ 400 (único)
+• Gestão mensal (campanhas + otimização semanal + relatório): R$ 600/mês
+• Verba dos anúncios: paga por você direto à plataforma (recomendo a partir de R$ 600/mês)
+  As contas ficam no SEU nome — o histórico e o público construído são seus.
+```
+
 ## Modelo de proposta (ajuste números e envie)
 
 ```
