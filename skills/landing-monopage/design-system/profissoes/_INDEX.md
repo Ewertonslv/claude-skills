@@ -3,6 +3,7 @@
 | Profissão | Arquétipo | Combo default |
 |---|---|---|
 | dentista | cuidado-premium | noite-dourada |
+| biomedica-esteta | cuidado-premium | noite-dourada |
 | medico-clinica | cuidado-premium | clareira |
 | psicologo | cuidado-premium | acolhida |
 | nutricionista | cuidado-premium | clareira |
