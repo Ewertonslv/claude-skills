@@ -19,6 +19,17 @@ o que o estágio permite.
 `prospecting` monta a lista → abordagem → interessado? Cria a pasta:
 `sites-clientes/<slug>/` + copiar `templates/cliente.yaml` e `templates/STATUS.md`.
 
+**A "digital" do prospect ideal** (calibrada no cliente real nº 1 — perfil de Instagram):
+1. link de **agregador** na bio (bio.site/linktree/beacons) no lugar de site próprio — sinal nº 1;
+2. **categoria errada** no perfil (ex.: "Digital creator" num dentista) = ninguém profissionalizou;
+3. serviços espremidos no texto da bio = precisa de vitrine;
+4. **ativo**: posts frequentes + destaques organizados (investe em imagem);
+5. ratio seguidores/seguindo ~1:1 = crescendo no braço, receptivo a alavanca.
+4 de 5 = Hot. Garimpo: Google Maps (ficha sem site), hashtags locais no IG,
+`site:linktr.ee <nicho> <cidade>` no Google. Sem scraping — caça manual assistida.
+Fechamento do ciclo: site publicado → trocar o agregador da bio pelo domínio próprio
+(o perfil do cliente vira prova social para os colegas do nicho que o seguem).
+
 ### BRIEFING — roteiro de perguntas (cole no WhatsApp, mapeia 1:1 no yaml)
 
 > Pra montar seu site, me responde rapidinho:
