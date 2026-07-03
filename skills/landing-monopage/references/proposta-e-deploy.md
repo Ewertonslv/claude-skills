@@ -35,6 +35,8 @@
 
 Combo completo (âncora de venda): **criação R$ 1.800 + R$ 120/mês (site) + R$ 600/mês (gestão) + verba do cliente**.
 Frase pro cliente: "o site é a vitrine; o tráfego é quem traz gente pra ela".
+Para desenhar/empacotar a oferta (garantia, bônus, ancoragem), use a skill **offers**;
+para conseguir clientes novos (lista + abordagem), **prospecting** + **cold-email**.
 Linha extra no modelo de proposta:
 
 ```

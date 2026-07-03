@@ -82,16 +82,18 @@ Crie a pasta do cliente e **copie `foundation/`** para lá. Depois:
 - preencha os dados (nome, serviços, contato, WhatsApp, JSON-LD);
 - aplique a **pele do brief** (tokens, fontes no `<link>`, ênfase de seções);
 - **quebre a repetição**: serviços em lista editorial (não cards idênticos), varie 1 seção, um "device de assinatura" quando o brief pedir. Ver **Armadilhas** abaixo.
+- Para headline/tagline/CTA e texto de objeções, use a skill **copywriting** (se instalada) com o contexto da ficha.
 
 ### PASSO 4 — Fotos
 Coloque as imagens reais em `assets/`. Para retrato em círculo e antes/depois, use os recortes via PowerShell/System.Drawing. **Ver `references/tecnicas-fotos-preview.md`.**
 
-### PASSO 5 — Validar o design com a impeccable (obrigatório)
+### PASSO 5 — Validar design (impeccable) + conversão (cro)
 Rode a skill **impeccable** sobre o `index.html` gerado:
 ```
 /impeccable critique <caminho>/index.html
 ```
 Leia o veredito (AI-slop, heurísticas, prioridades P0–P3) e **aplique as correções** (ou `/impeccable polish`). Repita até não parecer template. Este passo é o "para ver se o design está perfeito" — não pule.
+Depois, passe a página pela skill **cro** (se instalada): proposta de valor, headline, CTA, sinais de confiança, fricção — impeccable valida o *design*, cro valida a *conversão*.
 
 ### PASSO 6 — Preview
 Abra no navegador do usuário e gere screenshots (desktop + mobile) pra conferência. **Ver `references/tecnicas-fotos-preview.md`** (headless Chrome, truque do `min-height` do herói, gotcha da âncora).

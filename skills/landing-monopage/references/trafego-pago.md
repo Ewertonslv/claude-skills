@@ -4,6 +4,12 @@ A 3ª perna do negócio: **site (único) + hospedagem (mensal) + tráfego (mensa
 Guia passo-a-passo para quem nunca gerenciou campanha. Fase 1 = Meta Ads (Instagram/Facebook);
 fase 2 = Google Search.
 
+> **Skills complementares** (marketingskills do Corey Haines, se instaladas): **ads**
+> (estratégia/estrutura avançada, retargeting, headline mirroring) · **ad-creative**
+> (variações de criativo em massa) · **analytics** (tracking/UTM além do pixel) ·
+> **copywriting** (texto do anúncio e da página). Este playbook é o "como operar o
+> serviço"; as skills aprofundam cada disciplina.
+
 > Preços/custos mudam rápido. Antes de fechar proposta, rode `WebSearch`
 > ("quanto cobra gestor de tráfego <ano>", "CPL <nicho> Meta Ads Brasil <ano>").
 > Números abaixo = pesquisa BR jan-jul/2026.
