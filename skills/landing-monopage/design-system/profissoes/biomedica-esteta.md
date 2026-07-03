@@ -1,6 +1,6 @@
 # Ficha — Biomédica Esteta / Harmonização Facial
 
-- **Arquétipo:** cuidado-premium · combo default: `noite-dourada` (estética paga = dark luxe; perfil mais leve/jovem → `acolhida`)
+- **Arquétipo:** cuidado-premium · combo default: `orquidea-noturna` (dark rosé; se a carteira não tiver outro cliente dark-gold, `noite-dourada` também serve; perfil mais leve/jovem → `acolhida`)
 - **schema.org:** `HealthAndBeautyBusiness`
 - **Credencial:** CRBM/UF em destaque (herói + rodapé) + "habilitada em Biomedicina Estética"
 - **Serviços típicos:** Toxina Botulínica, Preenchimento Labial, Rinomodelação, Bioestimulador de Colágeno, Skinbooster, Microagulhamento, Peeling Químico, Limpeza de Pele Profunda (usar os que a cliente REALMENTE executa — checar destaques do Instagram)

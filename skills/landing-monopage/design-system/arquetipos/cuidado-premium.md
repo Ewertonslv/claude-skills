@@ -35,6 +35,18 @@ Fontes: **Lustria** (display) + **Nunito Sans** (corpo)
 `https://fonts.googleapis.com/css2?family=Lustria&family=Nunito+Sans:wght@400;600;700&display=swap`
 Quando usar: cuidado emocional/íntimo; acolhimento acima de status.
 
+### 4. `orquidea-noturna` — dark plum + rosé (2ª opção dark p/ estética; ex.: biomédica/harmonização)
+```css
+--bg:#171017; --surface:#211826; --ink:#F4EDF2; --muted:#c3b2c0;
+--brand:#D8A7B8; --accent:#92C5AD; --brand-rgb:216,167,184;
+```
+Fontes: **Italiana** (display) + **Figtree** (corpo)
+`https://fonts.googleapis.com/css2?family=Italiana&family=Figtree:wght@400;500;600;700&display=swap`
+Quando usar: mesmo posicionamento premium-escuro do noite-dourada, mas rosé/feminino —
+serve pra **diferenciar dois clientes premium-escuros da carteira** (regra de rotação).
+Atenção: Italiana só tem peso 400 — headings com `font-weight: 400` (nunca faux-bold).
+Contraste validado: todos os pares ≥ 8.3:1 (AA/AAA).
+
 ## Ênfase de seções + prova
 Herói com **retrato real** do profissional (rosto = confiança) · Sobre com credencial de conselho em destaque · Serviços em lista editorial · **Prova = antes/depois autorizado** (estética) ou depoimentos (psico — atenção: conselhos restringem depoimento clínico; ver ficha) · Contato WhatsApp.
 
