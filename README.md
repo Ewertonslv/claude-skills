@@ -6,10 +6,11 @@ systematize repeatable workflows. Some are mine; others are curated open-source 
 vendor and rely on. The interesting part isn't the format — it's encoding the *judgment*
 that separates careful work from bulldozing.
 
-> **Origin / license** is called out per skill and detailed under
-> [Licensing & attribution](#licensing--attribution). Only `landing-monopage` and
-> `oss-contribution` are my own work; the rest are vendored third-party skills kept under
-> their own licenses.
+> **Layout:** my own skills live in [`skills/`](skills/) (`landing-monopage`,
+> `oss-contribution`); everything else is vendored third-party under
+> [`external/`](external/), each under its own upstream license. The tables below index the
+> whole toolchain by category; the **Origin** column and
+> [Licensing & attribution](#licensing--attribution) say what is mine and what is vendored.
 
 ## Skills by category
 
@@ -65,16 +66,13 @@ The vendored skills are here so the toolchain travels with me in one place.
 
 ## Licensing & attribution
 
-`skills/` mixes my own work with vendored third-party skills. Each keeps its own license:
+Own work and vendored skills are kept in separate trees:
 
-- **My own** (MIT): `landing-monopage`, `oss-contribution`.
-- **Vendored marketing skills** (MIT) — from
-  [`coreyhaines31/marketingskills`](https://github.com/coreyhaines31/marketingskills), **not
-  my work**: `ads`, `ad-creative`, `analytics`, `cold-email`, `copywriting`, `cro`,
-  `offers`, `prospecting`.
-- **Vendored** (Apache-2.0), **not my work**: `impeccable`.
-- **`external/anthropic-skills/`** — vendored, unmodified, Apache-2.0 skills from Anthropic's
-  official [`anthropics/skills`](https://github.com/anthropics/skills) (mcp-builder,
-  skill-creator, webapp-testing, frontend-design); each keeps its own `LICENSE.txt`.
+- **[`skills/`](skills/) — my own, MIT:** `landing-monopage`, `oss-contribution`.
+- **[`external/`](external/) — vendored third-party, each under its own license** (see
+  [`external/README.md`](external/README.md)):
+  - `external/marketingskills/` — MIT, from [`coreyhaines31/marketingskills`](https://github.com/coreyhaines31/marketingskills) (`ads`, `ad-creative`, `analytics`, `cold-email`, `copywriting`, `cro`, `offers`, `prospecting`).
+  - `external/impeccable/` — Apache-2.0.
+  - `external/anthropic-skills/` — Apache-2.0, from [`anthropics/skills`](https://github.com/anthropics/skills) (`mcp-builder`, `skill-creator`, `webapp-testing`, `frontend-design`); each keeps its `LICENSE.txt`.
 
-The MIT `LICENSE` in this repo applies **only to my own skills** listed above.
+The MIT `LICENSE` in this repo applies **only to my own skills under `skills/`**.

@@ -1,3 +1,4 @@
-﻿
-# copia de referencia (skills da Anthropic) - nao versionar
-external/
+# Hub central de skills — external/ AGORA é versionado (vendored com licença própria).
+node_modules/
+__pycache__/
+.DS_Store
