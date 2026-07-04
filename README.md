@@ -1,62 +1,80 @@
 # claude-skills
 
-A small collection of [Claude Code](https://claude.com/claude-code) **skills** I build to
-systematize senior-engineering workflows — turning hard-won, repeatable process knowledge into
-reusable, testable automation.
+A collection of [Claude Code](https://claude.com/claude-code) **skills** — structured
+prompt-packages (a `SKILL.md` plus reference files) the agent loads on demand — that
+systematize repeatable workflows. Some are mine; others are curated open-source skills I
+vendor and rely on. The interesting part isn't the format — it's encoding the *judgment*
+that separates careful work from bulldozing.
 
-A "skill" here is a structured prompt-package (a `SKILL.md` plus reference files) that the agent
-loads on demand. The interesting part isn't the format — it's encoding the *judgment* that
-separates careful engineering from bulldozing.
+> **Origin / license** is called out per skill and detailed under
+> [Licensing & attribution](#licensing--attribution). Only `landing-monopage` and
+> `oss-contribution` are my own work; the rest are vendored third-party skills kept under
+> their own licenses.
 
-## Skills
+## Skills by category
 
-### `oss-contribution`
+### 🖥️ Client sites & design
+| Skill | What it does | Origin |
+|---|---|---|
+| `landing-monopage` | Create a freelance one-page site for a local business (dentist, lawyer, salon, clinic…), generate the commercial quote, and publish (Netlify/Hetzner). | **mine** · MIT |
+| `impeccable` | Design, audit and polish a frontend UI — visual hierarchy, accessibility, typography, motion, edge/empty states, reusable design tokens. | vendored · Apache-2.0 |
 
-A disciplined workflow for contributing to **external open-source repositories** (litellm,
-fastmcp, pydantic-ai, the MCP Python SDK, and similar Python/LLM-infra projects). Two modes:
+### 🔎 Prospecting & outreach
+| Skill | What it does | Origin |
+|---|---|---|
+| `prospecting` | Find, qualify and build a target list of prospects (B2B SaaS, general B2B, local businesses without a website). | vendored · MIT |
+| `cold-email` | Write B2B cold outreach and multi-touch follow-up sequences that get replies. | vendored · MIT |
 
-- **`support`** — triage and advance my own open PRs: classify incoming review/CI feedback, tell
-  branch-staleness apart from real failures, fix, respond to and resolve review threads.
-- **`discover`** — find an *unclaimed*, tractable issue, vet it, fix it with a regression test that
-  proves the bug, and open a clean PR following each repo's conventions.
+### ✍️ Copy & offer
+| Skill | What it does | Origin |
+|---|---|---|
+| `copywriting` | Write/rewrite marketing-page copy (hero, landing, pricing, features) that persuades and converts. | vendored · MIT |
+| `ad-creative` | Generate and iterate ad copy at scale — headlines, primary text, RSA variations, creative testing. | vendored · MIT |
+| `offers` | Design the offer itself — value stack, bonuses, guarantees, scarcity, naming, payment structure. | vendored · MIT |
 
-It exists because I kept relearning the same expensive lessons by hand. The skill encodes them as
-hard gates:
+### 📈 Traffic, conversion & measurement
+| Skill | What it does | Origin |
+|---|---|---|
+| `ads` | Paid-campaign strategy across Google/Meta/LinkedIn — targeting, bidding, ROAS/CPA optimization. | vendored · MIT |
+| `cro` | Conversion-rate optimization for pages and forms — diagnose why a page isn't converting and fix it. | vendored · MIT |
+| `analytics` | Set up and audit tracking/measurement (GA4, GTM, events, UTMs, attribution). | vendored · MIT |
 
-| Gate | The lesson behind it |
-|---|---|
-| **Anti-duplicate** | Got preempted 3× by not searching for an existing PR — including PRs that fix an issue without citing its number. Search by number *and* title keywords, and re-check right before opening. |
-| **Before/after proof** | A fix without a test that *fails then passes* (`git stash` the fix → red → restore → green) isn't a PR. No reproducible test ⇒ post a diagnostic comment instead of a weak PR. |
-| **Blast-radius** | A "one-line" change to a shared type/union breaks exhaustiveness (`assert_never`) and reclassifies values in consumers far away. Run the repo's *full* typecheck + suite, not just a linter and one test; separate pre-existing failures from your own. |
-| **Security self-review** | When you "open" a forwarded parameter, ask what *else* can flow through it. (A real review caught a routing-control bypass this way.) |
-| **Draft-and-ask** | If the obvious fix has semantic fallout, don't regenerate snapshots to force CI green — convert the PR to draft and ask the maintainer a design question. |
-| **Authoring hygiene** | Fork + blobless clone, branch off fresh `upstream/main`, Conventional Commits, correct identity, commit only intended files. |
+### 🛠️ Development & OSS
+| Skill | What it does | Origin |
+|---|---|---|
+| `oss-contribution` | Disciplined workflow to advance/open PRs in external OSS repos (litellm, fastmcp, pydantic-ai, MCP SDK) with hard gates: anti-duplicate, before/after proof, blast-radius, security self-review, draft-and-ask. | **mine** · MIT |
 
-Every **public action** (opening a PR, commenting, resolving a thread, pushing) is gated behind an
-explicit confirmation — the agent drafts the exact command and full text, shows it, and waits.
+## Highlight — `oss-contribution`
 
-```
-skills/oss-contribution/
-├─ SKILL.md            # lean entry point: modes, confirm policy, quick reference, red flags
-├─ config/targets.md   # editable per-repo rules (accepts external PRs? needs assignment? test cmd)
-├─ workflows/          # the two gated mode flows (support / discover)
-└─ references/         # the deep how-to for each gate
-```
+My own skill, born from re-learning the same expensive lessons by hand. Two modes:
+
+- **`support`** — triage and advance my own open PRs: classify review/CI feedback, tell
+  branch-staleness from real failures, fix, and resolve review threads.
+- **`discover`** — find an *unclaimed*, tractable issue, vet it, fix it with a regression
+  test that proves the bug, and open a clean PR following each repo's conventions.
+
+Every **public action** (opening a PR, commenting, pushing) is gated behind an explicit
+confirmation — the agent drafts the exact command and text, shows it, and waits.
 
 ## Why this repo exists
 
-I'm a backend engineer ([Viggo Sistemas](https://github.com/Ewertonslv), Delphi + PostgreSQL, 4+
-years) building toward remote work. These skills are how I make my own process repeatable and
-inspectable — the discipline is the product.
+I'm a backend engineer ([Viggo Sistemas](https://github.com/Ewertonslv), Delphi +
+PostgreSQL, 4+ years) building toward remote work. `landing-monopage` and `oss-contribution`
+are how I make my own process repeatable and inspectable — the discipline is the product.
+The vendored skills are here so the toolchain travels with me in one place.
 
-## Third-party skills
+## Licensing & attribution
 
-[`external/anthropic-skills/`](external/anthropic-skills/) holds a few **vendored,
-unmodified, Apache-2.0** skills from Anthropic's official [`anthropics/skills`](https://github.com/anthropics/skills)
-repo (mcp-builder, skill-creator, webapp-testing, frontend-design). They are **not my
-work** — each keeps its own `LICENSE.txt`. My own skills live under [`skills/`](skills/).
+`skills/` mixes my own work with vendored third-party skills. Each keeps its own license:
 
-## License
+- **My own** (MIT): `landing-monopage`, `oss-contribution`.
+- **Vendored marketing skills** (MIT) — from
+  [`coreyhaines31/marketingskills`](https://github.com/coreyhaines31/marketingskills), **not
+  my work**: `ads`, `ad-creative`, `analytics`, `cold-email`, `copywriting`, `cro`,
+  `offers`, `prospecting`.
+- **Vendored** (Apache-2.0), **not my work**: `impeccable`.
+- **`external/anthropic-skills/`** — vendored, unmodified, Apache-2.0 skills from Anthropic's
+  official [`anthropics/skills`](https://github.com/anthropics/skills) (mcp-builder,
+  skill-creator, webapp-testing, frontend-design); each keeps its own `LICENSE.txt`.
 
-MIT — applies to my own skills under `skills/`. Vendored skills under
-`external/anthropic-skills/` are governed by their own bundled `LICENSE.txt`.
+The MIT `LICENSE` in this repo applies **only to my own skills** listed above.
