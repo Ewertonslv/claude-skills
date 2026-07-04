@@ -49,6 +49,14 @@ I'm a backend engineer ([Viggo Sistemas](https://github.com/Ewertonslv), Delphi 
 years) building toward remote work. These skills are how I make my own process repeatable and
 inspectable — the discipline is the product.
 
+## Third-party skills
+
+[`external/anthropic-skills/`](external/anthropic-skills/) holds a few **vendored,
+unmodified, Apache-2.0** skills from Anthropic's official [`anthropics/skills`](https://github.com/anthropics/skills)
+repo (mcp-builder, skill-creator, webapp-testing, frontend-design). They are **not my
+work** — each keeps its own `LICENSE.txt`. My own skills live under [`skills/`](skills/).
+
 ## License
 
-MIT
+MIT — applies to my own skills under `skills/`. Vendored skills under
+`external/anthropic-skills/` are governed by their own bundled `LICENSE.txt`.
