@@ -23,7 +23,7 @@ Você passa alguns dados do cliente e esta skill gera uma **mono-page profission
 ## REGRA CRÍTICA — privacidade e escopo
 
 - Isto é **trabalho pessoal/freelance**. **NUNCA** salvar em Viggo Brain, repos `@viggo`/expxagents, nem usar tooling Viggo.
-- O site do cliente vive em `C:\Users\Ewerton\Documents\Projetos github\<slug-cliente>\` (ou onde o usuário indicar), **fora** de `C:\Projetos\` (Viggo).
+- O site do cliente vive no **monorepo** `C:\Users\Windows\Documents\Projetos\sites-clientes\<slug>\`, **fora** de qualquer coisa da Viggo. Os **arquivos web** (index.html, style.css, script.js, assets/) ficam em **`<slug>/public/`**; os **docs internos** (cliente.yaml, STATUS.md, PLANO-TRAFEGO.md) ficam na **raiz** da pasta do cliente — o Coolify serve só `public/`, então o financeiro nunca vai pro ar.
 - **Arquivos sempre em UTF-8** (com acentos diretos: á, ç, ã). Nada de ANSI.
 
 ## Fundação + design system (a ideia central)
@@ -58,8 +58,8 @@ Colete o que existir; o que faltar vira **placeholder com TODO visível** (nunca
 ## Pipeline
 
 ```
-0 profissão → ficha+arquétipo   1 dados   2 combo   3 gerar site
-      4 fotos   5 impeccable (validar design)   6 preview   7 proposta + deploy
+0 profissão → ficha+arquétipo   1 dados   2 combo   3 gerar site (em <slug>/public/)
+      4 fotos   5 impeccable (validar design)   6 preview LIVE (novo-cliente.ps1 → link sslip.io)   7 proposta + produção
 ```
 
 ### PASSO 0 — Resolver a profissão (ficha → arquétipo)
@@ -83,14 +83,14 @@ mesmo nicho**. Aplique os tokens no `:root` da foundation + a URL de fontes no `
 Nunca fontes da lista proibida (`design-system/README.md` § Regras duras).
 
 ### PASSO 3 — Gerar o site
-Crie a pasta do cliente e **copie `foundation/`** para lá. Depois:
+Crie `sites-clientes/<slug>/` e **copie `foundation/` para `<slug>/public/`** (os arquivos web ficam em `public/`; `cliente.yaml`/`STATUS.md`/`PLANO-TRAFEGO.md` ficam na **raiz** da pasta, nunca em `public/`). Enquanto for **preview**, ponha `<meta name="robots" content="noindex,nofollow">` no `<head>` (remove só na produção). Depois:
 - preencha os dados (nome, serviços, contato, WhatsApp, JSON-LD);
 - aplique a **pele do brief** (tokens, fontes no `<link>`, ênfase de seções);
 - **quebre a repetição**: serviços em lista editorial (não cards idênticos), varie 1 seção, um "device de assinatura" quando o brief pedir. Ver **Armadilhas** abaixo.
 - Para headline/tagline/CTA e texto de objeções, use a skill **copywriting** (se instalada) com o contexto da ficha.
 
 ### PASSO 4 — Fotos
-Coloque as imagens reais em `assets/`. Para retrato em círculo e antes/depois, use os recortes via PowerShell/System.Drawing. **Ver `references/tecnicas-fotos-preview.md`.**
+Coloque as imagens reais em `<slug>/public/assets/`. Para retrato em círculo e antes/depois, use os recortes via PowerShell/System.Drawing. **Ver `references/tecnicas-fotos-preview.md`.**
 
 ### PASSO 5 — Validar design (impeccable) + conversão (cro)
 Rode a skill **impeccable** sobre o `index.html` gerado:
@@ -100,15 +100,18 @@ Rode a skill **impeccable** sobre o `index.html` gerado:
 Leia o veredito (AI-slop, heurísticas, prioridades P0–P3) e **aplique as correções** (ou `/impeccable polish`). Repita até não parecer template. Este passo é o "para ver se o design está perfeito" — não pule.
 Depois, passe a página pela skill **cro** (se instalada): proposta de valor, headline, CTA, sinais de confiança, fricção — impeccable valida o *design*, cro valida a *conversão*.
 
-### PASSO 6 — Preview
-Abra no navegador do usuário e gere screenshots (desktop + mobile) pra conferência. **Ver `references/tecnicas-fotos-preview.md`** (headless Chrome, truque do `min-height` do herói, gotcha da âncora).
+### PASSO 6 — Preview (LIVE, pronto pra enviar ao cliente)
+Primeiro confira local (screenshots desktop+mobile — **ver `references/tecnicas-fotos-preview.md`**). Depois **publique o preview de verdade** com 1 comando:
+```
+powershell -NoProfile -ExecutionPolicy Bypass -File C:\Users\Windows\Documents\Projetos\sites-clientes\_scripts\novo-cliente.ps1 -Slug <slug>
+```
+Ele faz `git push` do monorepo + cria o app no Coolify (via API) + publica em **`https://<slug>.<IP-do-servidor>.sslip.io`** com SSL automático, e devolve o link. **É esse link que vai pro cliente** (grátis, sem comprar domínio). Pré-req: **túnel do Coolify de pé** (`localhost:9000`); se cair: `ssh -N -L 9000:localhost:8000 -L 6001:localhost:6001 root@<IP-do-servidor>`. Detalhes em `references/proposta-e-deploy.md`.
+> **1ª vez** usa `novo-cliente.ps1`. Pra **republicar depois de editar**, use `_scripts/atualizar-cliente.ps1 -Slug <slug>` (push + redeploy) — **NÃO** rode `novo-cliente` de novo, cria app duplicado.
 
-### PASSO 7 — Proposta comercial + deploy
-Monte a proposta (faixas de mercado atuais + modelo pronto pra enviar) e publique:
-**deploy de 1 comando no Hetzner** = `scripts/deploy-hetzner.sh <pasta> <dominio>`
-(upload + vhost nginx + SSL; use `--dry-run` pra conferir antes; config SSH em
-`~/.config/landing-deploy.env`). Alternativa rápida de preview: Netlify Drop.
-**Ver `references/proposta-e-deploy.md`.**
+### PASSO 7 — Proposta comercial + produção
+Monte a proposta (faixas atuais + modelo pronto — **ver `references/proposta-e-deploy.md`**) e envie junto com o **link de preview** (passo 6).
+**Produção (1 comando, só quando o cliente APROVA + PAGA):** registre o **domínio real dele** no Registro.br apontando pro IP `<IP-do-servidor>` (A → IP; espere propagar), então rode `_scripts/publicar-cliente.ps1 -Slug <slug> -Dominio <dominio-real>` — ele **remove o `noindex`**, troca o domínio do app (`sslip.io` → real) e redeploya (aborta sozinho se o domínio ainda não apontar pro servidor). Depois preencha `og:url`/`og:image`/`canonical` no `index.html`.
+> O `scripts/deploy-hetzner.sh` (nginx manual) é **legado** — a infra agora é **Coolify** (não use o script antigo, ele conflita com o proxy do Coolify nas portas 80/443).
 
 ## Estágios e gates (fluxo de cliente)
 
@@ -141,7 +144,8 @@ Fluxo completo + roteiro de perguntas: **`references/cenario-cliente-novo.md`**.
 ## Arquivos da skill
 - `foundation/` — esqueleto (index.html, style.css, script.js).
 - `templates/cliente.yaml` — contrato do manifest de cliente · `templates/STATUS.md` — estágios/gates.
-- `scripts/deploy-hetzner.sh` — publica no VPS em 1 comando (nginx+SSL, `--dry-run` disponível).
+- `scripts/deploy-hetzner.sh` — **LEGADO** (nginx manual; substituído pelo Coolify — não usar).
+- **Deploy real (no monorepo `sites-clientes/_scripts/`, fora da skill):** `novo-cliente.ps1` (cria preview no Coolify via API + sslip.io) · `atualizar-cliente.ps1` (push + redeploy de um existente) · `publicar-cliente.ps1 -Slug <s> -Dominio <d>` (produção: tira noindex + troca pro domínio real + redeploy). Infra na brain ("Infra sites-clientes LIVE", "Script novo-cliente.ps1").
 - `references/cenario-cliente-novo.md` — fluxo ponta-a-ponta do cliente + roteiro de perguntas.
 - `design-system/README.md` — contrato + fluxo de resolução (ficha → arquétipo → combo).
 - `design-system/arquetipos/` — 6 famílias de design com 2-3 combos cada.

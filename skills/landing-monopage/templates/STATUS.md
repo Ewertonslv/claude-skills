@@ -17,7 +17,7 @@ _(convenção: gate com **(cliente)** no fim = depende do cliente; sem marca = d
 ### 3. RASCUNHO → APROVAÇÃO
 - [ ] Site gerado (`/landing-monopage --manifest`)
 - [ ] impeccable validado (design) + cro validado (conversão)
-- [ ] Preview enviado ao cliente (screenshots ou link temporário)
+- [ ] Preview LIVE publicado (`novo-cliente.ps1` → link `sslip.io`, com noindex) e enviado ao cliente
 
 ### 4. APROVAÇÃO → PUBLICADO
 - [ ] Cliente aprovou o visual (cliente)
@@ -25,7 +25,7 @@ _(convenção: gate com **(cliente)** no fim = depende do cliente; sem marca = d
 - [ ] Dados finais no site: endereço, horário, depoimentos reais (cliente)
 - [ ] TCLE/autorizações de imagem assinados — obrigatório saúde (cliente)
 - [ ] Domínio registrado (registro.br) e apontado
-- [ ] Deploy feito (`scripts/deploy-hetzner.sh`) + SSL ok + og:url/og:image preenchidos
+- [ ] Produção: domínio real apontado + trocado no Coolify + **noindex removido** + SSL ok + og:url/og:image preenchidos
 
 ### 5. PUBLICADO → TRÁFEGO
 - [ ] Business Manager do cliente + acesso de parceiro pra mim (cliente)
@@ -41,9 +41,9 @@ _(convenção: gate com **(cliente)** no fim = depende do cliente; sem marca = d
 |---|---|---|
 | LEAD | prospecting, cold-email, offers | tudo do cliente |
 | BRIEFING | roteiro de perguntas, proposta preliminar | gerar site (falta manifest) |
-| RASCUNHO | gerar site, copywriting, impeccable, **cro** | deploy, tráfego |
+| RASCUNHO | gerar site, copywriting, impeccable, **cro**, **preview LIVE (sslip.io)** | produção (domínio real), tráfego |
 | APROVAÇÃO | ajustes, proposta final, preparar domínio | tráfego |
-| PUBLICADO | deploy, SEO local, Google Meu Negócio | anúncio só com TCLE+pixel |
+| PUBLICADO | produção (domínio real), SEO local, Google Meu Negócio | anúncio só com TCLE+pixel |
 | TRÁFEGO | ads, ad-creative, analytics, rotina semanal | — |
 
 ## Log

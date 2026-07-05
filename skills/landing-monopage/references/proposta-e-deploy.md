@@ -77,14 +77,16 @@ Opcional: gerar a proposta como **Artifact/HTML** (link bonito) — carrega o me
 
 ## Deploy
 
-**Rápido (preview p/ cliente) — Netlify Drop:** arraste a pasta em app.netlify.com/drop → URL na hora. Zero build.
+Infra: **VPS Hetzner + Coolify** (self-hosted). Os sites vivem no **monorepo** `sites-clientes` (1 pasta por cliente; arquivos web em `<slug>/public/`, docs internos na raiz — o Coolify serve só `public/`, então o financeiro nunca vaza).
 
-**Uma linha — Surge:** `npx surge` na pasta (1ª vez pede login; é interativo).
+**Preview p/ o cliente (grátis, sem comprar domínio):**
+```
+powershell -File C:\Users\Windows\Documents\Projetos\sites-clientes\_scripts\novo-cliente.ps1 -Slug <slug>
+```
+→ `git push` + cria o app no Coolify (via API) + publica em `https://<slug>.<IP-do-servidor>.sslip.io` com SSL automático (Let's Encrypt via sslip.io). É **esse** o link que vai pro cliente. Enquanto preview, o site tem `noindex`. Pré-req: túnel do Coolify de pé (`localhost:9000`; reabrir: `ssh -N -L 9000:localhost:8000 -L 6001:localhost:6001 root@<IP-do-servidor>`).
 
-**Servidor do usuário (Hetzner):** é site estático → basta servir a pasta.
-- Nginx: aponte um `server{}` com `root /var/www/<cliente>; index index.html;` + SSL via Certbot (Let's Encrypt).
-- Um VPS serve N clientes (um bloco/virtualhost por domínio). Domínio `.com.br` no registro.br apontando pro IP do VPS.
+**Produção (cliente aprovou + pagou):** registra o domínio real dele no Registro.br apontando pro IP `<IP-do-servidor>` → no Coolify, troca o domínio do app pro real → **remove o `noindex`** + preenche `og:url`/`og:image` → Redeploy.
 
-**Permanente grátis — GitHub Pages:** repo do cliente → Settings → Pages → branch/root. Link `usuario.github.io/<repo>`.
+> Curinga (`*`) NÃO dá no Registro.br (não aceita `*`); por isso o preview usa **sslip.io** (zero DNS). O `deploy-hetzner.sh` (nginx manual) é **legado** — não usar, conflita com o proxy do Coolify. Alternativas de preview sem infra (só se o Coolify estiver fora): Netlify Drop / Surge.
 
 > Antes de mandar o link, alinhe com o cliente o que ainda é **placeholder** (endereço/horário "a confirmar", depoimentos de exemplo) pra não passar impressão de inacabado.

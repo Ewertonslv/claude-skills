@@ -17,7 +17,7 @@ that separates careful work from bulldozing.
 ### 🖥️ Client sites & design
 | Skill | What it does | Origin |
 |---|---|---|
-| `landing-monopage` | Create a freelance one-page site for a local business (dentist, lawyer, salon, clinic…), generate the commercial quote, and publish (Netlify/Hetzner). | **mine** · MIT |
+| `landing-monopage` | Create a freelance one-page site for a local business (dentist, lawyer, salon, clinic…), generate the commercial quote, and publish it (self-hosted Coolify VPS + free `sslip.io` previews). | **mine** · MIT |
 | `impeccable` | Design, audit and polish a frontend UI — visual hierarchy, accessibility, typography, motion, edge/empty states, reusable design tokens. | vendored · Apache-2.0 |
 
 ### 🔎 Prospecting & outreach
