@@ -83,14 +83,27 @@ mesmo nicho**. Aplique os tokens no `:root` da foundation + a URL de fontes no `
 Nunca fontes da lista proibida (`design-system/README.md` § Regras duras).
 
 ### PASSO 3 — Gerar o site
-Crie `sites-clientes/<slug>/` e **copie `foundation/` para `<slug>/public/`** (os arquivos web ficam em `public/`; `cliente.yaml`/`STATUS.md`/`PLANO-TRAFEGO.md` ficam na **raiz** da pasta, nunca em `public/`). Enquanto for **preview**, ponha `<meta name="robots" content="noindex,nofollow">` no `<head>` (remove só na produção). Depois:
-- preencha os dados (nome, serviços, contato, WhatsApp, JSON-LD);
-- aplique a **pele do brief** (tokens, fontes no `<link>`, ênfase de seções);
+Crie `sites-clientes/<slug>/` e **copie `foundation/` para `<slug>/public/`** (os arquivos web ficam em `public/`; `cliente.yaml`/`STATUS.md`/`PLANO-TRAFEGO.md` ficam na **raiz** da pasta, nunca em `public/`). O `noindex` **não se põe à mão**: ele é derivado do estágio no `STATUS.md` pelos scripts de deploy (≠ PUBLICADO → entra; PUBLICADO → sai). Depois:
+- preencha os dados (nome, serviços, contato, JSON-LD);
+- **WhatsApp/Instagram/mensagem vão no `config.js`**, nunca no `script.js`. O `script.js` é **igual em todos os sites** e sincronizado por `_scripts/sync-foundation.ps1`: se você editá-lo por cliente, a próxima sync sobrescreve. Precisa mudar comportamento? Edite `foundation/script.js` e rode a sync.
+- aplique a **pele do brief** (tokens, fontes, ênfase de seções);
 - **quebre a repetição**: serviços em lista editorial (não cards idênticos), varie 1 seção, um "device de assinatura" quando o brief pedir. Ver **Armadilhas** abaixo.
 - Para headline/tagline/CTA e texto de objeções, use a skill **copywriting** (se instalada) com o contexto da ficha.
 
+### PASSO 3.5 — Fontes: hospedar, nunca CDN
+**Nunca** deixe `<link href="fonts.googleapis.com/...">` no site. É um stylesheet de terceiro que **bloqueia a renderização** (DNS + TLS + CSS antes de o navegador sequer descobrir o woff2) — o maior custo de LCP da página — e ainda entrega o IP do visitante pro Google (LGPD). Depois de escolher o combo:
+```
+python _scripts/hospedar-fontes.py <slug>
+```
+Ele baixa os woff2, gera `fonts.css` com `@font-face` local + `font-display: swap`, e troca o `<link>` do Google por preload + CSS local. Confira com `python _scripts/hospedar-fontes.py --check` (sai != 0 se algum site ainda usa o CDN).
+
 ### PASSO 4 — Fotos
 Coloque as imagens reais em `<slug>/public/assets/`. Para retrato em círculo e antes/depois, use os recortes via PowerShell/System.Drawing. **Ver `references/tecnicas-fotos-preview.md`.**
+
+Toda imagem, sem exceção:
+- **`.webp` + `.jpg`**, servidos por `<picture>` (`<source type="image/webp">` + `<img src="...jpg">`). Economiza ~45%. **Guarde sempre o `.jpg`**: é ele que o `og:image` usa — o crawler do WhatsApp/Facebook **não lê WebP**.
+- **`width` e `height`** com as dimensões **reais** do arquivo (senão a página "pula" enquanto carrega = CLS, que o Google penaliza). O CSS base já tem `img { height: auto }` — sem isso, `width`+`height` **distorcem** a foto.
+- Retrato do herói: `fetchpriority="high"`, **sem** `loading="lazy"` (ele é o LCP; lazy nele piora). Todo o resto: `loading="lazy"`.
 
 ### PASSO 5 — Validar design (impeccable) + conversão (cro)
 Rode a skill **impeccable** sobre o `index.html` gerado:
@@ -110,7 +123,8 @@ Ele faz `git push` do monorepo + cria o app no Coolify (via API) + publica em **
 
 ### PASSO 7 — Proposta comercial + produção
 Monte a proposta (faixas atuais + modelo pronto — **ver `references/proposta-e-deploy.md`**) e envie junto com o **link de preview** (passo 6).
-**Produção (1 comando, só quando o cliente APROVA + PAGA):** registre o **domínio real dele** no Registro.br apontando pro IP `<IP-do-servidor>` (A → IP; espere propagar), então rode `_scripts/publicar-cliente.ps1 -Slug <slug> -Dominio <dominio-real>` — ele **remove o `noindex`**, troca o domínio do app (`sslip.io` → real) e redeploya (aborta sozinho se o domínio ainda não apontar pro servidor). Depois preencha `og:url`/`og:image`/`canonical` no `index.html`.
+**Produção (1 comando, só quando o cliente APROVA + PAGA):** registre o **domínio real dele** no Registro.br apontando pro IP `<IP-do-servidor>` (A → IP; espere propagar), então rode `_scripts/publicar-cliente.ps1 -Slug <slug> -Dominio <dominio-real>`. Ele marca o estágio como PUBLICADO, **tira o `noindex`** (derivado do estágio), **preenche `og:url`/`og:image`/`canonical`** com o domínio real, troca o domínio do app (`sslip.io` → real) e redeploya (aborta sozinho se o domínio ainda não apontar pro servidor). Não sobra nada pra fazer à mão.
+> Confira o cartão de compartilhamento no [Sharing Debugger](https://developers.facebook.com/tools/debug/) — é o único jeito de saber se o link vai aparecer com imagem no WhatsApp.
 > O `scripts/deploy-hetzner.sh` (nginx manual) é **legado** — a infra agora é **Coolify** (não use o script antigo, ele conflita com o proxy do Coolify nas portas 80/443).
 
 ## Estágios e gates (fluxo de cliente)

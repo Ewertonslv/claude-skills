@@ -11,13 +11,23 @@
   <!-- Favicon inline (iniciais). TODO: trocar cores/letras -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23C9A35C' text-anchor='middle'%3E{{INICIAIS}}%3C/text%3E%3C/svg%3E">
 
-  <!-- Open Graph. TODO: og:url e og:image quando publicar -->
+  <!-- Open Graph — é o cartão que aparece quando o link é colado no WhatsApp e no
+       Instagram, que é como estes sites são distribuídos. Sem og:image o link vira um
+       retângulo de texto cinza.
+       og:image: caminho RELATIVO e em JPEG. Relativo porque o publicar-cliente.ps1 o torna
+       absoluto (o protocolo exige URL absoluta) junto com og:url e canonical, a partir do
+       domínio real. JPEG porque o crawler do WhatsApp/Facebook não lê WebP — mantenha
+       sempre o .jpg do retrato, mesmo servindo .webp pro navegador via <picture>. -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{NOME}}">
   <meta property="og:title" content="{{NOME}} — {{PROFISSAO}}">
   <meta property="og:description" content="{{SERVICOS_RESUMO}}. Agende pelo WhatsApp.">
   <meta property="og:locale" content="pt_BR">
-  <meta name="twitter:card" content="summary_large_image">
-  <!-- <link rel="canonical" href="https://SEU-DOMINIO"> -->
+  <meta property="og:image" content="assets/retrato.jpg">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta property="og:image:alt" content="Retrato de {{NOME}}, {{PROFISSAO}}">
+  <meta name="twitter:card" content="summary">
 
   <!-- Dados estruturados (SEO local). TODO: @type por profissão (Dentist, LegalService, HealthAndBeautyBusiness, ExerciseGym...), telephone, address, url -->
   <script type="application/ld+json">
@@ -179,6 +189,9 @@
     </div>
   </footer>
 
+  <!-- config.js (dados do cliente) ANTES do script.js (comum a todos os sites).
+       Os dois são defer, então executam nesta ordem. -->
+  <script src="config.js" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>
