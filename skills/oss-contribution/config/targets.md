@@ -32,14 +32,14 @@ Identidade: GitHub `Ewertonslv`, autor de commit `Ewerton Silva <ewertoncom297@g
 
 ## Forks ja existentes (clones locais)
 
-- `C:\Users\Ewerton\Documents\Projetos github\litellm` (venv em `.venv`)
-- `C:\Users\Ewerton\Documents\Projetos github\fastmcp`
-- `C:\Users\Ewerton\Documents\Projetos github\pydantic-ai`
-- `C:\Users\Ewerton\Documents\Projetos github\python-sdk`
-- `C:\Users\Ewerton\Documents\Projetos github\mcp-context-forge` (venv `.venv`; fork `Ewertonslv/mcp-context-forge`)
+Base atual: `C:\Users\Windows\Documents\Projetos\` (verificado em 2026-07-11).
+
+- `C:\Users\Windows\Documents\Projetos\litellm` (venv em `.venv`; fork `Ewertonslv/litellm`)
+- `C:\Users\Windows\Documents\Projetos\llm` (fork `Ewertonslv/llm`, simonw/llm)
+- `C:\Users\Windows\Documents\Projetos\mcp-servers-fork` (fork `Ewertonslv/servers`, modelcontextprotocol/servers)
 
 Reusar esses clones; sincronizar com `git fetch upstream main` antes de criar branch.
 
-Alvos novos (garak, instructor, simonw/llm, outlines, openllmetry) **ainda sem clone local** —
-no primeiro discover, fazer fork + `git clone --filter=blob:none` (ver authoring-hygiene.md) e
-adicionar o path aqui.
+Sem clone local (fazer fork + `git clone --filter=blob:none` no primeiro discover — ver
+authoring-hygiene.md — e adicionar o path aqui): fastmcp, pydantic-ai, python-sdk,
+mcp-context-forge, garak, instructor, outlines, openllmetry.
